@@ -1,16 +1,10 @@
 package homepage;
 
-import javafx.event.Event;
+import javafx.scene.input.MouseEvent;
 
 public class Controller {
 
-    public void displayListLessons(Event event) {
-
-    }
-
-    public void displayListDiscussions(Event event) {
-    }
-
-    public void displayListQuizzes(Event event) {
+    public void onSignInButtonClick(MouseEvent mouseEvent) {
+        System.out.print("Log In");
     }
 }
