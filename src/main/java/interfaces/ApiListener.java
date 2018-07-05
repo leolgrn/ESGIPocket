@@ -1,4 +1,4 @@
-package data.mainapi;
+package interfaces;
 
 public interface ApiListener<T> {
     void onSuccess(T response);

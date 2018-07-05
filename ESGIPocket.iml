@@ -25,5 +25,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: com.guigarage:ui-basics:X.Y" level="project" />
   </component>
 </module>

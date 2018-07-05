@@ -2,15 +2,17 @@ package data.dto.mapper;
 
 import data.dto.EAuthentification;
 import data.model.Authentification;
+import interfaces.Mapping;
 
-public class AuthentificationMapper {
+public class AuthentificationMapper implements Mapping<Authentification, EAuthentification> {
 
-    public Authentification map(EAuthentification eAuthentification){
+    @Override
+    public Authentification map(EAuthentification item) {
         Authentification authentification = Authentification.getInstance();
         UserMapper userMapper = new UserMapper();
 
-        authentification.setToken(eAuthentification.getToken());
-        authentification.setUser(userMapper.map(eAuthentification.geteUser()));
+        authentification.setToken(item.getToken());
+        authentification.setUser(userMapper.map(item.geteUser()));
 
         return authentification;
     }

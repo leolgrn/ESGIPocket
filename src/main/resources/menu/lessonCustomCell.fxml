@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" style="-fx-background-color: #ffffff;"  xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="lessonTopic" fill="#007ca9" layoutX="39.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 15px; -fx-font-weight: bold;" text="TOPIC" wrappingWidth="337.1960144042969">
+         <font>
+            <Font name="Source Sans Pro Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fx:id="lessonTitle" layoutX="39.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20px;" text="Title" wrappingWidth="311.3677291870117">
+         <font>
+            <Font name="Source Sans Pro" size="13.0" />
+         </font>
+      </Text>
+      <Text fx:id="lessonAuthor" fill="#979191" layoutX="39.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="auhtor" wrappingWidth="283.55743408203125">
+         <font>
+            <Font name="Source Sans Pro Italic" size="13.0" />
+         </font>
+      </Text>
+      <Text fx:id="description" layoutX="39.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="283.55743246851307">
+         <font>
+            <Font name="Source Sans Pro" size="13.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

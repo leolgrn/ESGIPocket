@@ -2,14 +2,16 @@ package data.dto.mapper;
 
 import data.dto.ETopic;
 import data.model.Topic;
+import interfaces.ArrayListMapping;
 
 import java.util.ArrayList;
 
-public class TopicListMapper {
+public class TopicListMapper implements ArrayListMapping<Topic, ETopic> {
 
-    public ArrayList<Topic> map(ArrayList<ETopic> eTopics){
+    @Override
+    public ArrayList<Topic> map(ArrayList<ETopic> arrayList) {
         ArrayList<Topic> topicList = new ArrayList<>();
-        for(ETopic eTopic: eTopics){
+        for(ETopic eTopic: arrayList){
             Topic topic = new Topic();
             topic.setId(eTopic.getId());
             topic.setName(eTopic.getName());

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class ETopic {
 
     @SerializedName("name") private String name;
-    @SerializedName("id") private String id;
+    @SerializedName("_id") private String id;
 
     public String getName() {
         return name;
