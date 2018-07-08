@@ -3,13 +3,12 @@ package data.mainapi;
 import data.dto.EAuthentification;
 import data.dto.ECourse;
 import data.dto.ETopic;
+import data.dto.EUser;
 import data.dto.mapper.AuthentificationMapper;
 import data.dto.mapper.CourseListMapper;
 import data.dto.mapper.TopicListMapper;
-import data.model.Authentification;
-import data.model.Course;
-import data.model.LoginCredentials;
-import data.model.Topic;
+import data.dto.mapper.UserListMapper;
+import data.model.*;
 import interfaces.ApiListener;
 import interfaces.ESGIPocketService;
 import okhttp3.Interceptor;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 
 public class ESGIPocketProvider {
 
-    private static final String BASE_URL = "https://esgipocket.herokuapp.com/";
+    private static final String BASE_URL = "https://esgipocket-staging.herokuapp.com/";
 
     private ESGIPocketService esgiPocketService;
 
@@ -76,6 +75,25 @@ public class ESGIPocketProvider {
             }
         });
     }
+
+    public void getUsers(final ApiListener<ArrayList<User>> listener){
+        esgiPocketService.getUsers().enqueue(new Callback<ArrayList<EUser>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EUser>> call, Response<ArrayList<EUser>> response) {
+                if(listener != null){
+                    UserListMapper userListMapper = new UserListMapper();
+                    ArrayList<User> userArrayList = userListMapper.map(response.body());
+                    listener.onSuccess(userArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EUser>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
 
     public void getTopics(final ApiListener<ArrayList<Topic>> listener){
        esgiPocketService.getTopics().enqueue(new Callback<ArrayList<ETopic>>() {

@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class EUser {
 
+    @SerializedName("_id") private String id;
     @SerializedName("firstname") private String firstname;
     @SerializedName("lastname") private String lastname;
     @SerializedName("email") private String email;
@@ -77,10 +78,19 @@ public class EUser {
         this.classId = classId;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "EUser{" +
-                "firstname='" + firstname + '\'' +
+                "id='" + id + '\'' +
+                ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

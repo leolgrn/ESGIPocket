@@ -30,8 +30,6 @@ public class CourseListViewController {
     @FXML
     private ListView<Course> courseListView;
 
-
-
     public CourseListViewController(BorderPane insideBorderPane) {
         this.insideBorderPane = insideBorderPane;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/listView.fxml"));
@@ -39,6 +37,7 @@ public class CourseListViewController {
         try
         {
             courseListView = fxmlLoader.load();
+            courseListView.getStylesheets().add(getClass().getResource("/menu/ressources/css/courseCustomCell.css").toExternalForm());
             this.insideBorderPane.setCenter(courseListView);
         }
         catch (IOException e)
@@ -53,7 +52,6 @@ public class CourseListViewController {
         esgiPocketProvider.getCourses(id, new ApiListener<ArrayList<Course>>() {
             @Override
             public void onSuccess(ArrayList<Course> response) {
-                System.out.println(response.toString());
                 observableList.setAll(response);
                 courseListView.setItems(observableList);
                 courseListView.setCellFactory((Callback<ListView<Course>, ListCell<Course>>) listView -> new CourseCell());
@@ -64,7 +62,6 @@ public class CourseListViewController {
                 throwable.printStackTrace();
             }
         });
-
     }
 
     public void setListCellEvent(){

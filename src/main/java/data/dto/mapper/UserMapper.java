@@ -18,6 +18,7 @@ public class UserMapper implements Mapping<User, EUser> {
         user.setActivated(item.getActivated());
         user.setRole(item.getRole());
         user.setClassId(item.getClassId());
+        user.setId(item.getId());
 
         return user;
     }

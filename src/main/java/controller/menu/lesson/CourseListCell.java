@@ -3,6 +3,7 @@ package controller.menu.lesson;
 import data.model.Course;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class CourseListCell {
 
     @FXML
-    public Pane pane;
+    public AnchorPane anchorPane;
     @FXML
     public Text lessonTitle;
     @FXML
@@ -26,7 +27,7 @@ public class CourseListCell {
         fxmlLoader.setController(this);
         try
         {
-            pane = fxmlLoader.load();
+            anchorPane = fxmlLoader.load();
         }
         catch (IOException e)
         {
@@ -41,7 +42,7 @@ public class CourseListCell {
         lessonAuthor.setText(course.getUpdatedAt());
     }
 
-    public Pane getPane(){
-        return pane;
+    public AnchorPane getPane(){
+        return anchorPane;
     }
 }

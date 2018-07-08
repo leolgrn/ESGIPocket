@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="81.0" prefWidth="709.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="firstname" fill="WHITE" layoutX="48.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname" />
+      <Text fx:id="lastname" fill="WHITE" layoutX="180.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LastName" />
+      <Text fx:id="email" fill="WHITE" layoutX="322.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+      <Text fx:id="activated" fill="WHITE" layoutX="446.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activated" />
+      <Button fx:id="delete" layoutX="596.0" layoutY="27.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-text-fill: #ffffff;" text="Delete" />
+   </children>
+</AnchorPane>

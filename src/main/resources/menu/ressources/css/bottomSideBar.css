@@ -1,0 +1,12 @@
+#button_add_new_course{
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+}
+
+#button_add_new_course:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+}
