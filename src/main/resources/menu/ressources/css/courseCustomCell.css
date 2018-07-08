@@ -1,0 +1,36 @@
+.list-view{
+    -fx-padding: 10px;
+    -fx-background-color:#303030;
+}
+
+.list-view:focused{
+    -fx-padding: 10px;
+    -fx-border: transparent;
+}
+
+.list-cell:empty {
+    visibility:hidden;
+}
+
+.list-cell {
+    -fx-padding: 20px;
+    -fx-background-color: #303030;
+    -fx-border-radius: 30px;
+}
+
+.list-cell:filled:selected:focused{
+    -fx-padding: 20px;
+    -fx-background-color: #404040;
+    -fx-border-radius: 30px;
+}
+
+#courseCell{
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+#courseCell:hover{
+    -fx-cursor: hand;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}

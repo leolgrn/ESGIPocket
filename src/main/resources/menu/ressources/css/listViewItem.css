@@ -1,0 +1,41 @@
+.list-view{
+    -fx-background-color:#303030;
+}
+
+.list-view:focused{
+    -fx-border: transparent;
+}
+
+.list-cell:empty {
+    visibility:hidden;
+}
+
+.list-cell {
+    -fx-padding: 10px;
+    -fx-background-color: #303030;
+    -fx-text-fill: #ffffff;
+}
+
+.list-cell {
+    -fx-padding: 10px;
+    -fx-background-color: #303030;
+    -fx-text-fill: #ffffff;
+}
+
+.list-cell:hover {
+    -fx-cursor: hand;
+    -fx-padding: 10px;
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+}
+
+
+.list-cell:filled:selected:focused{
+    -fx-padding: 10px;
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+}
+
+.button:filled:selected:focused{
+    -fx-background-color: #404040;
+}

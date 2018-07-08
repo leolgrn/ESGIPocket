@@ -1,12 +1,16 @@
 package data.mainapi;
 
 import data.dto.EAuthentification;
+import data.dto.ECourse;
 import data.dto.ETopic;
+import data.dto.EUser;
 import data.dto.mapper.AuthentificationMapper;
+import data.dto.mapper.CourseListMapper;
 import data.dto.mapper.TopicListMapper;
-import data.model.Authentification;
-import data.model.LoginCredentials;
-import data.model.Topic;
+import data.dto.mapper.UserListMapper;
+import data.model.*;
+import interfaces.ApiListener;
+import interfaces.ESGIPocketService;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,11 +19,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ESGIPocketProvider {
 
-    private static final String BASE_URL = "https://esgipocket.herokuapp.com/";
+    private static final String BASE_URL = "https://esgipocket-staging.herokuapp.com/";
 
     private ESGIPocketService esgiPocketService;
 
@@ -73,6 +76,25 @@ public class ESGIPocketProvider {
         });
     }
 
+    public void getUsers(final ApiListener<ArrayList<User>> listener){
+        esgiPocketService.getUsers().enqueue(new Callback<ArrayList<EUser>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EUser>> call, Response<ArrayList<EUser>> response) {
+                if(listener != null){
+                    UserListMapper userListMapper = new UserListMapper();
+                    ArrayList<User> userArrayList = userListMapper.map(response.body());
+                    listener.onSuccess(userArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EUser>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+
     public void getTopics(final ApiListener<ArrayList<Topic>> listener){
        esgiPocketService.getTopics().enqueue(new Callback<ArrayList<ETopic>>() {
            @Override
@@ -89,5 +111,24 @@ public class ESGIPocketProvider {
                if (listener != null) listener.onError(throwable);
            }
        });
+    }
+
+    public void getCourses(String id, final ApiListener<ArrayList<Course>> listener){
+        esgiPocketService.getCourses(id).enqueue(new Callback<ArrayList<ECourse>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ECourse>> call, Response<ArrayList<ECourse>> response) {
+                if(listener != null){
+                    CourseListMapper courseListMapper = new CourseListMapper();
+                    ArrayList<Course> courseArrayList = courseListMapper.map(response.body());
+                    listener.onSuccess(courseArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ECourse>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+
     }
 }

@@ -5,26 +5,22 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.menu.Menu">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.menu.Menu">
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #303030;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#onHomeClick" prefHeight="40.0" prefWidth="104.0" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0#f0f0f0#f0f0f0#f0f0f0;" text="Home">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#onLessonsClick" prefHeight="40.0" prefWidth="104.0" style="-fx-background-color: transparent; -fx-text-fill: #f0f0f0#f0f0f0#f0f0f0#f0f0f0;" text="Lessons">
+            <Button mnemonicParsing="false" onMouseClicked="#onAdminClick" prefHeight="40.0" prefWidth="104.0" style="-fx-background-color: #303030; -fx-text-fill: #f0f0f0#f0f0f0#f0f0f0#f0f0f0;" styleClass="button_sidebar" text="Home" />
+            <Button mnemonicParsing="false" onMouseClicked="#onLessonsClick" prefHeight="40.0" prefWidth="104.0" style="-fx-background-color: transparent; -fx-text-fill: #f0f0f0#f0f0f0#f0f0f0#f0f0f0;" styleClass="button_sidebar" text="Lessons">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#onQuizzesClick" prefHeight="40.0" prefWidth="104.0" style="-fx-background-color: transparent; -fx-text-fill: #f0f0f0#f0f0f0#f0f0f0#f0f0f0;" text="Quizzes">
+            <Button mnemonicParsing="false" onMouseClicked="#onQuizzesClick" prefHeight="40.0" prefWidth="104.0" style="-fx-background-color: transparent; -fx-text-fill: #f0f0f0#f0f0f0#f0f0f0#f0f0f0;" styleClass="button_sidebar" text="Quizzes">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#onAdminClick" prefHeight="40.0" prefWidth="104.0" style="-fx-background-color: transparent; -fx-text-fill: #f0f0f0#f0f0f0#f0f0f0#f0f0f0;" text="Admin">
+            <Button mnemonicParsing="false" onMouseClicked="#onAdminClick" prefHeight="40.0" prefWidth="104.0" style="-fx-background-color: transparent; -fx-text-fill: #f0f0f0#f0f0f0#f0f0f0#f0f0f0;" styleClass="button_sidebar" text="Admin">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
@@ -32,4 +28,7 @@
          </children>
       </VBox>
    </left>
+   <center>
+      <BorderPane fx:id="insideBorderPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #303030;" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

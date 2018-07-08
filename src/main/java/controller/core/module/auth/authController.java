@@ -2,7 +2,7 @@ package controller.core.module.auth;
 
 import controller.core.Core;
 import controller.menu.Menu;
-import data.mainapi.ApiListener;
+import interfaces.ApiListener;
 import data.mainapi.ESGIPocketProvider;
 import data.model.Authentification;
 import data.model.LoginCredentials;
@@ -24,7 +24,8 @@ public class authController {
     private TextField password;
 
     public void onSignInButtonClick(MouseEvent mouseEvent) {
-        LoginCredentials loginCredentials = new LoginCredentials(email.getText(), password.getText());
+        //LoginCredentials loginCredentials = new LoginCredentials(email.getText(), password.getText());
+        LoginCredentials loginCredentials = new LoginCredentials("llegron@myges.fr", "Evolutione345");
         ESGIPocketProvider esgiPocketProvider = new ESGIPocketProvider();
         esgiPocketProvider.postLogIn(loginCredentials, new ApiListener<Authentification>() {
             public void onSuccess(Authentification response) {

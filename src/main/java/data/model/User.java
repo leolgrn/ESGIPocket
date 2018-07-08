@@ -2,6 +2,7 @@ package data.model;
 
 public class User {
 
+    private String id;
     private String firstname;
     private String lastname;
     private String email;
@@ -75,10 +76,19 @@ public class User {
         this.classId = classId;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "firstname='" + firstname + '\'' +
+                "id='" + id + '\'' +
+                ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

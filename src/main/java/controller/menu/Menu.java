@@ -1,10 +1,14 @@
 package controller.menu;
 
+import controller.menu.admin.AdminViewController;
+import controller.menu.lesson.CourseListViewController;
+import controller.menu.topic.TopicListViewController;
+import data.model.Topic;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -15,13 +19,15 @@ public class Menu {
 
     private Stage stage;
     private Scene scene;
+
     @FXML
     private BorderPane borderPane;
-    private Parent root;
+    @FXML
+    private BorderPane insideBorderPane;
 
     public void start(Stage stage) throws IOException {
         borderPane = FXMLLoader.load(getClass().getResource("/menu/menu.fxml"));
-        scene =  new Scene(borderPane, 800 ,500);
+        scene =  new Scene(borderPane, 800 ,500);scene.getStylesheets().add(getClass().getResource("/menu/ressources/css/courseCustomCell.css").toExternalForm());
 
         Platform.runLater(() -> {
             stage.setScene(scene);
@@ -30,37 +36,37 @@ public class Menu {
         });
     }
 
-
     public void onHomeClick(MouseEvent mouseEvent) {
     }
 
     public void onLessonsClick(MouseEvent mouseEvent) {
-        loadFXML("/menu/lessons.fxml");
-
+        borderPane.setCenter(insideBorderPane);
+        //BottomSideBar bottomSideBar = new BottomSideBar(borderPane);
+        TopicListViewController topicListViewController = new TopicListViewController(insideBorderPane);
+        ListView<Topic> listView = new ListView<>();
+        listView.getStylesheets().add(getClass().getResource("/menu/ressources/css/listViewItem.css").toExternalForm());
+        listView.setOnMouseClicked(event -> {
+            CourseListViewController courseListViewController = new CourseListViewController(insideBorderPane);
+            courseListViewController.setListView(listView.getSelectionModel().getSelectedItem().getId());
+        });
+        //bottomSideBar.setSideBar();
+        topicListViewController.setTopicList(listView);
     }
 
     public void onQuizzesClick(MouseEvent mouseEvent) {
-        loadFXML("/menu/quizzes.fxml");
-
-
+        borderPane.setCenter(insideBorderPane);
+        TopicListViewController topicListViewController = new TopicListViewController(insideBorderPane);
+        ListView<Topic> listView = new ListView<>();
+        listView.getStylesheets().add(getClass().getResource("/menu/ressources/css/listViewItem.css").toExternalForm());
+        listView.setOnMouseClicked(event -> {
+        });
+        topicListViewController.setTopicList(listView);
     }
 
     public void onAdminClick(MouseEvent mouseEvent) {
-        loadFXML("/menu/admin.fxml");
+        AdminViewController adminViewController = new AdminViewController(insideBorderPane);
+        adminViewController.setListItem();
+        borderPane.setBottom(null);
     }
 
-    public void loadFXML(String window){
-        try {
-            root = FXMLLoader.load(getClass().getResource(window));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Platform.runLater(() -> {
-            borderPane.setCenter(root);
-        });
-
-
-    }
 }
