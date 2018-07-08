@@ -1,4 +1,4 @@
-package controller.menu.admin;
+package controller.menu.admin.user;
 
 import data.model.User;
 import javafx.application.Platform;

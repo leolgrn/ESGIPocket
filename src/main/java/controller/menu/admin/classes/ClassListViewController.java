@@ -1,8 +1,8 @@
-package controller.menu.admin;
+package controller.menu.admin.classes;
 
-import abstractclass.ListViewController;
 import data.mainapi.ESGIPocketProvider;
 import data.model.Authentification;
+import data.model.Class;
 import data.model.User;
 import interfaces.ApiListener;
 import javafx.collections.FXCollections;
@@ -16,14 +16,14 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class UserListViewController {
+public class ClassListViewController {
 
     private BorderPane borderPane;
 
-    private ObservableList<User> observableList = FXCollections.observableArrayList();
-    private ListView<User> listView;
+    private ObservableList<Class> observableList = FXCollections.observableArrayList();
+    private ListView<Class> listView;
 
-    public UserListViewController(ListView<User> listView, BorderPane borderPane) {
+    public ClassListViewController(ListView<Class> listView, BorderPane borderPane) {
         this.borderPane = borderPane;
         this.listView = listView;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/listView.fxml"));
@@ -42,17 +42,17 @@ public class UserListViewController {
 
     public void setListView() {
         ESGIPocketProvider esgiPocketProvider = new ESGIPocketProvider(Authentification.getInstance().getToken());
-        esgiPocketProvider.getUsers(new ApiListener<ArrayList<User>>() {
+        esgiPocketProvider.getClasses(new ApiListener<ArrayList<Class>>() {
             @Override
-            public void onSuccess(ArrayList<User> response) {
+            public void onSuccess(ArrayList<Class> response) {
                 observableList.setAll(response);
                 listView.setItems(observableList);
-                listView.setCellFactory((Callback<ListView<User>, ListCell<User>>) listView -> new UserCell());
+                listView.setCellFactory((Callback<ListView<Class>, ListCell<Class>>) listView -> new ClassCell());
             }
 
             @Override
             public void onError(Throwable throwable) {
-                throwable.printStackTrace();
+
             }
         });
     }

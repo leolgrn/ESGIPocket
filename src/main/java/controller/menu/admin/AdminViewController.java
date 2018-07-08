@@ -1,18 +1,13 @@
 package controller.menu.admin;
 
-import data.model.Course;
+import controller.menu.admin.classes.ClassListViewController;
+import controller.menu.admin.user.UserListViewController;
 import data.model.User;
+import data.model.Class;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Observable;
 
 public class AdminViewController {
 
@@ -39,9 +34,14 @@ public class AdminViewController {
         System.out.print(item);
         switch (item){
             case "Utilisateurs":
-                ListView<User> listView = new ListView<>();
-                UserListViewController userListViewController = new UserListViewController(listView, borderPane);
+                ListView<User> userListView = new ListView<>();
+                UserListViewController userListViewController = new UserListViewController(userListView, borderPane);
                 userListViewController.setListView();
+                break;
+            case "Classes":
+                ListView<Class> classListView = new ListView<>();
+                ClassListViewController classListViewController = new ClassListViewController(classListView, borderPane);
+                classListViewController.setListView();
                 break;
             default:
                 System.out.println("Not done yet");

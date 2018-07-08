@@ -1,6 +1,7 @@
 package data.dto;
 
 import com.google.gson.annotations.SerializedName;
+import data.model.Class;
 
 public class EUser {
 
@@ -12,7 +13,7 @@ public class EUser {
     @SerializedName("activationCode") private int activationCode;
     @SerializedName("activated") private Boolean activated;
     @SerializedName("role") private int role;
-    @SerializedName("class") private String classId;
+    //@SerializedName("class") private EClass eClass;
 
     public String getFirstname() {
         return firstname;
@@ -42,9 +43,7 @@ public class EUser {
         return role;
     }
 
-    public String getClassId() {
-        return classId;
-    }
+    //public EClass getClasse() { return eClass; }
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
@@ -74,9 +73,7 @@ public class EUser {
         this.role = role;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
-    }
+    //public void setClasse(EClass eClass) {this.eClass = eClass; }
 
     public String getId() {
         return id;
@@ -97,7 +94,7 @@ public class EUser {
                 ", activationCode=" + activationCode +
                 ", activated=" + activated +
                 ", role=" + role +
-                ", classId='" + classId + '\'' +
+                //", eClass=" + eClass +
                 '}';
     }
 }

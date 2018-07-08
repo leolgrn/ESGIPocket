@@ -13,6 +13,7 @@ public class UserListMapper implements ArrayListMapping<User, EUser> {
         ArrayList<User> userArrayList = new ArrayList<>();
         for (EUser eUser: arrayList){
             User user = new User();
+            ClassMapper classMapper = new ClassMapper();
 
             user.setFirstname(eUser.getFirstname());
             user.setLastname(eUser.getLastname());
@@ -21,7 +22,7 @@ public class UserListMapper implements ArrayListMapping<User, EUser> {
             //user.setActivationCode(eUser.getActivationCode());
             user.setActivated(eUser.getActivated());
             user.setRole(eUser.getRole());
-            user.setClassId(eUser.getClassId());
+            //user.setClasse(classMapper.map(eUser.getClasse()));
             user.setId(eUser.getId());
 
             userArrayList.add(user);

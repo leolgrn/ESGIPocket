@@ -10,7 +10,7 @@ public class User {
     private int activationCode;
     private Boolean activated;
     private int role;
-    private String classId;
+    //private Class classe;
 
     public String getFirstname() {
         return firstname;
@@ -40,9 +40,7 @@ public class User {
         return role;
     }
 
-    public String getClassId() {
-        return classId;
-    }
+    //public Class getClasse() { return classe;}
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
@@ -72,9 +70,7 @@ public class User {
         this.role = role;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
-    }
+    //public void setClasse(Class classe) {this.classe = classe;}
 
     public String getId() {
         return id;
@@ -95,7 +91,7 @@ public class User {
                 ", activationCode=" + activationCode +
                 ", activated=" + activated +
                 ", role=" + role +
-                ", classId='" + classId + '\'' +
+                //", classe=" + classe +
                 '}';
     }
 }

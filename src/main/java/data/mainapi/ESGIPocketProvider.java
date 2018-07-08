@@ -1,14 +1,9 @@
 package data.mainapi;
 
-import data.dto.EAuthentification;
-import data.dto.ECourse;
-import data.dto.ETopic;
-import data.dto.EUser;
-import data.dto.mapper.AuthentificationMapper;
-import data.dto.mapper.CourseListMapper;
-import data.dto.mapper.TopicListMapper;
-import data.dto.mapper.UserListMapper;
+import data.dto.*;
+import data.dto.mapper.*;
 import data.model.*;
+import data.model.Class;
 import interfaces.ApiListener;
 import interfaces.ESGIPocketService;
 import okhttp3.Interceptor;
@@ -64,6 +59,7 @@ public class ESGIPocketProvider {
             public void onResponse(Call<EAuthentification> call, Response<EAuthentification> response) {
                 if(listener != null){
                     // Authentication Singleton creation
+                    System.out.println(response);
                     AuthentificationMapper authentificationMapper = new AuthentificationMapper();
                     Authentification authentification = authentificationMapper.map(response.body());
                     listener.onSuccess(authentification);
@@ -130,5 +126,24 @@ public class ESGIPocketProvider {
             }
         });
 
+    }
+
+    public void getClasses(final ApiListener<ArrayList<Class>> listener){
+        esgiPocketService.getClasses().enqueue(new Callback<ArrayList<EClass>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EClass>> call, Response<ArrayList<EClass>> response) {
+                if(listener != null){
+                    System.out.println(response);
+                    ClassListMapper classListMapper = new ClassListMapper();
+                    ArrayList<Class> classArrayList = classListMapper.map(response.body());
+                    listener.onSuccess(classArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EClass>> call, Throwable throwable) {
+                    throwable.printStackTrace();
+            }
+        });
     }
 }
