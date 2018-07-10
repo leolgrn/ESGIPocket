@@ -6,14 +6,10 @@ import retrofit2.Call;
 import retrofit2.http.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface ESGIPocketService {
 
-
-    @Headers("Content-Type: application/json")
-    @POST("login")
-    Call<EAuthentification> postLogIn(@Body LoginCredentials loginCredentials);
+    // GET Method
 
     @Headers("Content-Type: application/json")
     @GET("users")
@@ -28,6 +24,30 @@ public interface ESGIPocketService {
     Call<ArrayList<EClass>> getClasses();
 
     @Headers("Content-Type: application/json")
+    @GET("courses")
+    Call<ArrayList<ECourse>> getCourses();
+
+    @Headers("Content-Type: application/json")
+    @GET("groups")
+    Call<ArrayList<EGroup>> getGroups();
+
+    @Headers("Content-Type: application/json")
+    @GET("years")
+    Call<ArrayList<EYear>> getYears();
+
+    @Headers("Content-Type: application/json")
+    @GET("specialities")
+    Call<ArrayList<ESpeciality>> getSpecialities();
+
+    @Headers("Content-Type: application/json")
     @GET("topics/{id}/courses")
-    Call<ArrayList<ECourse>> getCourses(@Path("id") String id);
+    Call<ArrayList<ECourse>> getCoursesById(@Path("id") String id);
+
+    // POST Method
+
+    @Headers("Content-Type: application/json")
+    @POST("login")
+    Call<EAuthentification> postLogIn(@Body LoginCredentials loginCredentials);
+
+
 }

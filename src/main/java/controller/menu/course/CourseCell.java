@@ -1,9 +1,8 @@
-package controller.menu.lesson;
+package controller.menu.course;
 
 import data.model.Course;
 import javafx.application.Platform;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 
 public class CourseCell extends ListCell<Course> {
 

@@ -1,6 +1,5 @@
-package controller.menu;
+package controller.menu.course.bottomSideBar;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,7 +8,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class BottomSideBar {
+public class BottomSideBarController {
 
     private BorderPane borderPane;
 
@@ -19,13 +18,13 @@ public class BottomSideBar {
     @FXML
     private AnchorPane anchorPane;
 
-    public BottomSideBar(BorderPane borderPane) {
+    public BottomSideBarController(BorderPane borderPane) {
         this.borderPane = borderPane;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/bottom_sidebar.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/course/bottom_sidebar.fxml"));
         fxmlLoader.setController(this);
         try {
             anchorPane = fxmlLoader.load();
-            anchorPane.getStylesheets().add(getClass().getResource("/menu/ressources/css/bottomSideBar.css").toExternalForm());
+            anchorPane.getStylesheets().add(getClass().getResource("/menu/css/bottomSideBar.css").toExternalForm());
         } catch (IOException e) {
             e.printStackTrace();
         }

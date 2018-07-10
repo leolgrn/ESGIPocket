@@ -13,7 +13,7 @@ public class EUser {
     @SerializedName("activationCode") private int activationCode;
     @SerializedName("activated") private Boolean activated;
     @SerializedName("role") private int role;
-    //@SerializedName("class") private EClass eClass;
+    @SerializedName("class") private EClass eClass;
 
     public String getFirstname() {
         return firstname;
@@ -43,7 +43,7 @@ public class EUser {
         return role;
     }
 
-    //public EClass getClasse() { return eClass; }
+    public EClass getClasse() { return eClass; }
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
@@ -73,7 +73,7 @@ public class EUser {
         this.role = role;
     }
 
-    //public void setClasse(EClass eClass) {this.eClass = eClass; }
+    public void setClasse(EClass eClass) {this.eClass = eClass; }
 
     public String getId() {
         return id;
@@ -94,7 +94,7 @@ public class EUser {
                 ", activationCode=" + activationCode +
                 ", activated=" + activated +
                 ", role=" + role +
-                //", eClass=" + eClass +
+                ", eClass=" + eClass +
                 '}';
     }
 }

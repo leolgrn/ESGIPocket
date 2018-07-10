@@ -9,7 +9,7 @@ public class ECourse {
     @SerializedName("content") private String content;
     @SerializedName("_id") private String id;
     @SerializedName("topic") private ETopic topic;
-    @SerializedName("class") private String classId;
+    @SerializedName("class") private EClass classe;
     @SerializedName("updatedAt") private String updatedAt;
     @SerializedName("createdAt") private String createdAt;
 
@@ -45,12 +45,12 @@ public class ECourse {
         this.topic = topic;
     }
 
-    public String getClassId() {
-        return classId;
+    public EClass getClasse() {
+        return classe;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
+    public void setClass(EClass classId) {
+        this.classe = classe;
     }
 
     public String getUpdatedAt() {
@@ -85,7 +85,7 @@ public class ECourse {
                 ", content='" + content + '\'' +
                 ", id='" + id + '\'' +
                 ", topic=" + topic +
-                ", classId='" + classId + '\'' +
+                ", classId='" + classe + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 '}';

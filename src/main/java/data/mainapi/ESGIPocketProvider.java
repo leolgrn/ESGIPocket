@@ -109,8 +109,8 @@ public class ESGIPocketProvider {
        });
     }
 
-    public void getCourses(String id, final ApiListener<ArrayList<Course>> listener){
-        esgiPocketService.getCourses(id).enqueue(new Callback<ArrayList<ECourse>>() {
+    public void getCoursesById(String id, final ApiListener<ArrayList<Course>> listener){
+        esgiPocketService.getCoursesById(id).enqueue(new Callback<ArrayList<ECourse>>() {
             @Override
             public void onResponse(Call<ArrayList<ECourse>> call, Response<ArrayList<ECourse>> response) {
                 if(listener != null){
@@ -128,12 +128,29 @@ public class ESGIPocketProvider {
 
     }
 
+    public void getCourses(final ApiListener<ArrayList<Course>> listener){
+        esgiPocketService.getCourses().enqueue(new Callback<ArrayList<ECourse>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ECourse>> call, Response<ArrayList<ECourse>> response) {
+                if(listener != null){
+                    CourseListMapper courseListMapper = new CourseListMapper();
+                    ArrayList<Course> courseArrayList = courseListMapper.map(response.body());
+                    listener.onSuccess(courseArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ECourse>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
     public void getClasses(final ApiListener<ArrayList<Class>> listener){
         esgiPocketService.getClasses().enqueue(new Callback<ArrayList<EClass>>() {
             @Override
             public void onResponse(Call<ArrayList<EClass>> call, Response<ArrayList<EClass>> response) {
                 if(listener != null){
-                    System.out.println(response);
                     ClassListMapper classListMapper = new ClassListMapper();
                     ArrayList<Class> classArrayList = classListMapper.map(response.body());
                     listener.onSuccess(classArrayList);
@@ -142,7 +159,61 @@ public class ESGIPocketProvider {
 
             @Override
             public void onFailure(Call<ArrayList<EClass>> call, Throwable throwable) {
-                    throwable.printStackTrace();
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getGroups(final ApiListener<ArrayList<Group>> listener){
+        esgiPocketService.getGroups().enqueue(new Callback<ArrayList<EGroup>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EGroup>> call, Response<ArrayList<EGroup>> response) {
+                if(listener != null){
+                    GroupListMapper groupListMapper = new GroupListMapper();
+                    ArrayList<Group> groupArrayList = groupListMapper.map(response.body());
+                    listener.onSuccess(groupArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EGroup>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getYears(final ApiListener<ArrayList<Year>> listener){
+        esgiPocketService.getYears().enqueue(new Callback<ArrayList<EYear>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EYear>> call, Response<ArrayList<EYear>> response) {
+                if(listener != null){
+                    YearListMapper yearListMapper = new YearListMapper();
+                    ArrayList<Year> yearArrayList = yearListMapper.map(response.body());
+                    listener.onSuccess(yearArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EYear>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getSpecialities(final ApiListener<ArrayList<Speciality>> listener){
+        esgiPocketService.getSpecialities().enqueue(new Callback<ArrayList<ESpeciality>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ESpeciality>> call, Response<ArrayList<ESpeciality>> response) {
+                if(listener != null){
+                    SpecialityListMapper specialityListMapper = new SpecialityListMapper();
+                    ArrayList<Speciality> specialityArrayList = specialityListMapper.map(response.body());
+                    listener.onSuccess(specialityArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ESpeciality>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
             }
         });
     }

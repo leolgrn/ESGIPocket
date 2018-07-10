@@ -1,52 +1,63 @@
 package controller.menu.admin;
 
+import abstractclass.ListViewController;
 import controller.menu.admin.classes.ClassListViewController;
+import controller.menu.admin.course.CourseListViewController;
+import controller.menu.admin.group.GroupListViewController;
+import controller.menu.admin.speciality.SpecialityListViewController;
+import controller.menu.admin.topic.TopicListViewController;
 import controller.menu.admin.user.UserListViewController;
-import data.model.User;
-import data.model.Class;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
+import controller.menu.admin.year.YearListViewController;
 import javafx.scene.layout.BorderPane;
 
-public class AdminViewController {
-
-    private BorderPane borderPane;
-    private ObservableList<String> observableList;
-    private ListView<String> listView;
+public class AdminViewController extends ListViewController<String> {
 
     public AdminViewController(BorderPane borderPane){
-        this.borderPane = borderPane;
+        super(borderPane, "left");
     }
 
-    public void setListItem(){
-        observableList = FXCollections.observableArrayList("Utilisateurs", "Classes", "Matières", "Cours");
-        listView = new ListView<>();
-        listView.getStylesheets().add(getClass().getResource("/menu/ressources/css/listViewItem.css").toExternalForm());
-        listView.setItems(observableList);
-        listView.setOnMouseClicked(event -> {
-            loadListView(listView.getSelectionModel().getSelectedItem());
+    @Override
+    public void setListView() {
+        getObservableList().setAll("Utilisateurs", "Classes", "Matières", "Cours", "Groupes", "Années", "Spécialités");
+        getListView().setItems(getObservableList());
+        getListView().setOnMouseClicked(event -> {
+            loadListView(getListView().getSelectionModel().getSelectedItem());
         });
-        borderPane.setLeft(listView);
     }
 
     public void loadListView(String item){
-        System.out.print(item);
         switch (item){
             case "Utilisateurs":
-                ListView<User> userListView = new ListView<>();
-                UserListViewController userListViewController = new UserListViewController(userListView, borderPane);
+                UserListViewController userListViewController = new UserListViewController(getBorderPane());
                 userListViewController.setListView();
                 break;
             case "Classes":
-                ListView<Class> classListView = new ListView<>();
-                ClassListViewController classListViewController = new ClassListViewController(classListView, borderPane);
+                ClassListViewController classListViewController = new ClassListViewController(getBorderPane());
                 classListViewController.setListView();
                 break;
+            case "Matières":
+                TopicListViewController topicListViewController = new TopicListViewController(getBorderPane());
+                topicListViewController.setListView();
+                break;
+            case "Cours":
+                CourseListViewController courseListViewController = new CourseListViewController(getBorderPane());
+                courseListViewController.setListView();
+                break;
+            case "Groupes":
+                GroupListViewController groupListViewController = new GroupListViewController(getBorderPane());
+                groupListViewController.setListView();
+                break;
+            case "Spécialités":
+                SpecialityListViewController specialityListViewController = new SpecialityListViewController(getBorderPane());
+                specialityListViewController.setListView();
+                break;
+            case "Années":
+                YearListViewController yearListViewController = new YearListViewController(getBorderPane());
+                yearListViewController.setListView();
+                break;
             default:
-                System.out.println("Not done yet");
+                System.out.println("No model");
         }
     }
-
 
 }

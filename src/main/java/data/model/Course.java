@@ -7,7 +7,7 @@ public class Course {
     private String content;
     private String id;
     private Topic topic;
-    private String classId;
+    private Class classe;
     private String updatedAt;
     private String createdAt;
 
@@ -43,12 +43,12 @@ public class Course {
         this.topic = topic;
     }
 
-    public String getClassId() {
-        return classId;
+    public Class getClasse() {
+        return classe;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
+    public void setClass(Class classe) {
+        this.classe = classe;
     }
 
     public String getUpdatedAt() {
@@ -83,7 +83,7 @@ public class Course {
                 ", content='" + content + '\'' +
                 ", id='" + id + '\'' +
                 ", topic=" + topic +
-                ", classId='" + classId + '\'' +
+                ", classe='" + classe + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 '}';

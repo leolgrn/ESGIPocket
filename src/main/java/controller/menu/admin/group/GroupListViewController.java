@@ -1,30 +1,29 @@
-package controller.menu.admin.user;
+package controller.menu.admin.group;
 
 import abstractclass.ListViewController;
 import data.mainapi.ESGIPocketProvider;
 import data.model.Authentification;
-import data.model.User;
+import data.model.Group;
 import interfaces.ApiListener;
 import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 
-public class UserListViewController extends ListViewController<User> {
+public class GroupListViewController extends ListViewController<Group> {
 
-
-    public UserListViewController(BorderPane borderPane) {
+    public GroupListViewController(BorderPane borderPane) {
         super(borderPane, "center");
     }
 
     @Override
     public void setListView() {
         ESGIPocketProvider esgiPocketProvider = new ESGIPocketProvider(Authentification.getInstance().getToken());
-        esgiPocketProvider.getUsers(new ApiListener<ArrayList<User>>() {
+        esgiPocketProvider.getGroups(new ApiListener<ArrayList<Group>>() {
             @Override
-            public void onSuccess(ArrayList<User> response) {
+            public void onSuccess(ArrayList<Group> response) {
                 getObservableList().setAll(response);
                 getListView().setItems(getObservableList());
-                getListView().setCellFactory(listView -> new UserCell());
+                getListView().setCellFactory(listView -> new GroupCell());
             }
 
             @Override

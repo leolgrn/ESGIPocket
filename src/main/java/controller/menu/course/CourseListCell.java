@@ -1,10 +1,9 @@
-package controller.menu.lesson;
+package controller.menu.course;
 
 import data.model.Course;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class CourseListCell {
     public Text description;
 
     public CourseListCell() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/lessonCustomCell.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/course/courseCustomCell.fxml"));
         fxmlLoader.setController(this);
         try
         {
