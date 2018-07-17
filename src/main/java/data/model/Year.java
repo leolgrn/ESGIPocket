@@ -2,6 +2,7 @@ package data.model;
 
 public class Year {
 
+    private String id;
     private String name;
     private String acronym;
 
@@ -21,12 +22,20 @@ public class Year {
         this.acronym = acronym;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Year{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", acronym='" + acronym + '\'' +
                 '}';
     }
-
 }

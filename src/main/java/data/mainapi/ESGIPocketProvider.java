@@ -4,6 +4,7 @@ import data.dto.*;
 import data.dto.mapper.*;
 import data.model.*;
 import data.model.Class;
+import data.model.credentials.LoginCredentials;
 import interfaces.ApiListener;
 import interfaces.ESGIPocketService;
 import okhttp3.Interceptor;
@@ -39,6 +40,10 @@ public class ESGIPocketProvider {
         esgiPocketService = retrofit.create(ESGIPocketService.class);
     }
 
+    public ESGIPocketService getEsgiPocketService() {
+        return esgiPocketService;
+    }
+
     private OkHttpClient createOkHttpClient(final String token) {
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
                 if(token != null){
@@ -51,6 +56,8 @@ public class ESGIPocketProvider {
                 }
         return okBuilder.build();
     }
+
+    // POST methods
 
     public void postLogIn(LoginCredentials loginCredentials, final ApiListener<Authentification> listener) {
         esgiPocketService
@@ -71,6 +78,8 @@ public class ESGIPocketProvider {
             }
         });
     }
+
+    // GET Methods
 
     public void getUsers(final ApiListener<ArrayList<User>> listener){
         esgiPocketService.getUsers().enqueue(new Callback<ArrayList<EUser>>() {

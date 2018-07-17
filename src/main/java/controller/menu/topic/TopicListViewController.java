@@ -23,4 +23,9 @@ public class TopicListViewController extends ListViewController<Topic> {
             courseListViewController.setListView();
         });
     }
+
+    @Override
+    public void setAddCell() {
+
+    }
 }

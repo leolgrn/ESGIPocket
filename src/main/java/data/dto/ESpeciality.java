@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ESpeciality {
 
+    @SerializedName("_id") private String id;
     @SerializedName("name") private String name;
     @SerializedName("acronym") private String acronym;
 
@@ -23,10 +24,19 @@ public class ESpeciality {
         this.acronym = acronym;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "ESpeciality{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", acronym='" + acronym + '\'' +
                 '}';
     }

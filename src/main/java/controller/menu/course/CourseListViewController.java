@@ -31,9 +31,9 @@ public class CourseListViewController extends ListViewController<Course> {
         esgiPocketProvider.getCoursesById(id, new ApiListener<ArrayList<Course>>() {
             @Override
             public void onSuccess(ArrayList<Course> response) {
-                CourseListViewController.super.getObservableList().setAll(response);
-                CourseListViewController.super.getListView().setItems(CourseListViewController.super.getObservableList());
-                CourseListViewController.super.getListView().setCellFactory(listView -> new CourseCell());
+                getObservableList().setAll(response);
+                getListView().setItems(getObservableList());
+                getListView().setCellFactory(listView -> new CourseCell());
             }
 
             @Override
@@ -43,10 +43,15 @@ public class CourseListViewController extends ListViewController<Course> {
         });
     }
 
+    @Override
+    public void setAddCell() {
+        
+    }
+
     public void setListCellEvent(){
-        CourseListViewController.super.getListView().setOnMouseClicked(event -> {
+        getListView().setOnMouseClicked(event -> {
             try {
-                URL url = new URL(CourseListViewController.super.getListView().getSelectionModel().getSelectedItem().getContent());
+                URL url = new URL(getListView().getSelectionModel().getSelectedItem().getContent());
                 readPdf(url);
                 openPdf();
             } catch (MalformedURLException e) {

@@ -2,6 +2,7 @@ package data.model;
 
 public class Speciality {
 
+    private String id;
     private String name;
     private String acronym;
 
@@ -21,10 +22,19 @@ public class Speciality {
         this.acronym = acronym;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Speciality{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", acronym='" + acronym + '\'' +
                 '}';
     }

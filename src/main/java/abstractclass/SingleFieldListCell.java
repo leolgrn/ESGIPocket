@@ -1,5 +1,7 @@
 package abstractclass;
 
+import data.mainapi.delete.ESGIPocketProviderDelete;
+import data.model.Authentification;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,6 +11,8 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 
 public abstract class SingleFieldListCell<T> {
+
+    private ESGIPocketProviderDelete esgiPocketProviderDelete;
 
     @FXML
     private AnchorPane anchorPane;
@@ -22,6 +26,7 @@ public abstract class SingleFieldListCell<T> {
     public SingleFieldListCell(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/admin/SingleFieldListCell.fxml"));
         fxmlLoader.setController(this);
+        esgiPocketProviderDelete = new ESGIPocketProviderDelete(Authentification.getInstance().getToken());
         try
         {
             anchorPane = fxmlLoader.load();
@@ -30,6 +35,10 @@ public abstract class SingleFieldListCell<T> {
         {
             throw new RuntimeException(e);
         }
+    }
+
+    public AnchorPane getPane() {
+        return anchorPane;
     }
 
     public Text getName() {
@@ -44,14 +53,11 @@ public abstract class SingleFieldListCell<T> {
         return delete;
     }
 
-    public void setDelete(Button delete) {
-        this.delete = delete;
-    }
-
-    public AnchorPane getPane(){
-        return anchorPane;
+    public ESGIPocketProviderDelete getEsgiPocketProviderDelete() {
+        return esgiPocketProviderDelete;
     }
 
     public abstract void setInfo(T object);
+
 
 }

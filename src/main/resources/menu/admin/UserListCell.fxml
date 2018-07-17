@@ -4,12 +4,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="775.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" minWidth="700.0" prefHeight="61.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="firstname" fill="WHITE" layoutX="52.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname" />
-      <Text fx:id="lastname" fill="WHITE" layoutX="184.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LastName" />
-      <Text fx:id="email" fill="WHITE" layoutX="322.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <Text fx:id="activated" fill="WHITE" layoutX="543.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activated" />
-      <Button fx:id="delete" layoutX="669.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-text-fill: #ffffff;" text="Delete" />
+      <Text fx:id="firstname" fill="WHITE" layoutX="52.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname" AnchorPane.leftAnchor="20.0" />
+      <Text fx:id="lastname" fill="WHITE" layoutX="184.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LastName" AnchorPane.leftAnchor="180.0" />
+      <Text fx:id="email" fill="WHITE" layoutX="322.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" AnchorPane.leftAnchor="350.0" />
+      <Text fx:id="activated" fill="WHITE" layoutX="543.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activated" AnchorPane.rightAnchor="130.0" />
+      <Button fx:id="delete" layoutX="669.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-text-fill: #ffffff;" text="Delete" AnchorPane.rightAnchor="20.0" />
    </children>
 </AnchorPane>

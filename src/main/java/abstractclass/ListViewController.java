@@ -82,5 +82,7 @@ public abstract class ListViewController<T> {
 
     public abstract void setListView();
 
+    public abstract void setAddCell();
+
 
 }

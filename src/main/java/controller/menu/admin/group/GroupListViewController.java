@@ -32,4 +32,11 @@ public class GroupListViewController extends ListViewController<Group> {
             }
         });
     }
+
+    @Override
+    public void setAddCell() {
+        GroupAddCell groupAddCell = new GroupAddCell();
+        groupAddCell.setAddCell();
+        getBorderPane().setBottom(groupAddCell.getAnchorPane());
+    }
 }

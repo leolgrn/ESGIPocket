@@ -10,6 +10,7 @@ public class YearMapper implements Mapping<Year, EYear> {
         Year year = new Year();
         year.setAcronym(item.getAcronym());
         year.setName(item.getName());
+        year.setId(item.getId());
         return year;
     }
 }

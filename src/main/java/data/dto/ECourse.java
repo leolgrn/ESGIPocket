@@ -12,6 +12,9 @@ public class ECourse {
     @SerializedName("class") private EClass classe;
     @SerializedName("updatedAt") private String updatedAt;
     @SerializedName("createdAt") private String createdAt;
+    @SerializedName("user") private EUser user;
+    @SerializedName("like") private int like;
+    @SerializedName("dislike") private int dislike;
 
     public String getTitle() {
         return title;
@@ -77,6 +80,30 @@ public class ECourse {
         this.content = content;
     }
 
+    public EUser getUser() {
+        return user;
+    }
+
+    public void setUser(EUser user) {
+        this.user = user;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public int getDislike() {
+        return dislike;
+    }
+
+    public void setDislike(int dislike) {
+        this.dislike = dislike;
+    }
+
     @Override
     public String toString() {
         return "ECourse{" +
@@ -85,9 +112,12 @@ public class ECourse {
                 ", content='" + content + '\'' +
                 ", id='" + id + '\'' +
                 ", topic=" + topic +
-                ", classId='" + classe + '\'' +
+                ", classe=" + classe +
                 ", updatedAt='" + updatedAt + '\'' +
                 ", createdAt='" + createdAt + '\'' +
+                ", user=" + user +
+                ", like=" + like +
+                ", dislike=" + dislike +
                 '}';
     }
 }

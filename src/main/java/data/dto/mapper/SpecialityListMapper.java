@@ -14,6 +14,7 @@ public class SpecialityListMapper implements ArrayListMapping<Speciality, ESpeci
             Speciality speciality = new Speciality();
             speciality.setAcronym(eSpeciality.getAcronym());
             speciality.setName(eSpeciality.getName());
+            speciality.setId(eSpeciality.getId());
             specialityArrayList.add(speciality);
         }
         return specialityArrayList;

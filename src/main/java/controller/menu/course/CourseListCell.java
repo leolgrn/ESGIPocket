@@ -19,6 +19,10 @@ public class CourseListCell {
     @FXML
     public Text lessonAuthor;
     @FXML
+    public Text like;
+    @FXML
+    public Text dislike;
+    @FXML
     public Text description;
 
     public CourseListCell() {
@@ -38,7 +42,9 @@ public class CourseListCell {
     {
         lessonTitle.setText(course.getTitle());
         lessonTopic.setText(course.getTopic().getName());
-        lessonAuthor.setText(course.getUpdatedAt());
+        lessonAuthor.setText(course.getUser().getFirstname() + " " + course.getUser().getLastname());
+        like.setText(Integer.toString(course.getLike()));
+        dislike.setText(Integer.toString(course.getDislike()));
     }
 
     public AnchorPane getPane(){

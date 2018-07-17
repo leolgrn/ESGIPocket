@@ -3,6 +3,7 @@ package data.dto.mapper;
 import data.dto.EUser;
 import data.model.User;
 import interfaces.ArrayListMapping;
+import jdk.internal.cmm.SystemResourcePressureImpl;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,6 @@ public class UserListMapper implements ArrayListMapping<User, EUser> {
         for (EUser eUser: arrayList){
             User user = new User();
             ClassMapper classMapper = new ClassMapper();
-
             user.setFirstname(eUser.getFirstname());
             user.setLastname(eUser.getLastname());
             user.setEmail(eUser.getEmail());

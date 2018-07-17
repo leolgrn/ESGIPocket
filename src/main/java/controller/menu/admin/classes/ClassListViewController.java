@@ -32,4 +32,11 @@ public class ClassListViewController extends ListViewController<Class> {
             }
         });
     }
+
+    @Override
+    public void setAddCell() {
+        ClassAddCell classAddCell = new ClassAddCell();
+        classAddCell.setAddCell();
+        getBorderPane().setBottom(classAddCell.getAnchorPane());
+    }
 }

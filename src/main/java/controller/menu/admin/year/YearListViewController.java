@@ -5,6 +5,7 @@ import data.mainapi.ESGIPocketProvider;
 import data.model.Authentification;
 import data.model.Year;
 import interfaces.ApiListener;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
@@ -31,6 +32,13 @@ public class YearListViewController extends ListViewController<Year> {
                 throwable.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void setAddCell() {
+        YearAddCell yearAddCell = new YearAddCell();
+        yearAddCell.setAddCell();
+        getBorderPane().setBottom(yearAddCell.getAnchorPane());
     }
 
 }

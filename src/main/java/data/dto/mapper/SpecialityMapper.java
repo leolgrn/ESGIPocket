@@ -10,6 +10,7 @@ public class SpecialityMapper implements Mapping<Speciality, ESpeciality> {
         Speciality speciality = new Speciality();
         speciality.setAcronym(item.getAcronym());
         speciality.setName(item.getName());
+        speciality.setId(item.getId());
         return speciality;
     }
 }

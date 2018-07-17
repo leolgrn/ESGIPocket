@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="775.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" minWidth="500.0" prefHeight="61.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="speciality" fill="WHITE" layoutX="52.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speciality" />
-      <Text fx:id="group" fill="WHITE" layoutX="541.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="G" />
-      <Text fx:id="year" fill="WHITE" layoutX="572.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
-      <Button fx:id="delete" layoutX="673.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-text-fill: #ffffff;" text="Delete" />
+      <Text fx:id="speciality" fill="WHITE" layoutX="52.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speciality" AnchorPane.leftAnchor="20.0" />
+      <Text fx:id="group" fill="WHITE" layoutX="541.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="G" AnchorPane.leftAnchor="230.0" />
+      <Text fx:id="year" fill="WHITE" layoutX="572.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" AnchorPane.leftAnchor="270.0" />
+      <Button fx:id="delete" layoutX="673.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-text-fill: #ffffff;" text="Delete" AnchorPane.rightAnchor="20.0" />
    </children>
 </AnchorPane>

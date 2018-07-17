@@ -1,6 +1,7 @@
-package data.model;
+package data.model.credentials;
 
 public class LoginCredentials {
+
     private String email;
     private String password;
 

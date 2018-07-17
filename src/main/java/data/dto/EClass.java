@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class EClass {
 
+    @SerializedName("_id") private String id;
     @SerializedName("year") private EYear eYear;
     @SerializedName("group") private EGroup eGroup;
     @SerializedName("speciality") private ESpeciality eSpeciality;
@@ -46,10 +47,19 @@ public class EClass {
         this.topics = topics;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "EClass{" +
-                "eYear=" + eYear +
+                "id='" + id + '\'' +
+                ", eYear=" + eYear +
                 ", eGroup=" + eGroup +
                 ", eSpeciality=" + eSpeciality +
                 ", topics=" + topics +

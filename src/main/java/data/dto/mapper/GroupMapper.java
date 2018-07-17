@@ -10,6 +10,7 @@ public class GroupMapper implements Mapping<Group, EGroup> {
         Group group = new Group();
         group.setName(item.getName());
         group.setNumber(item.getNumber());
+        group.setId(item.getId());
         return group;
     }
 }

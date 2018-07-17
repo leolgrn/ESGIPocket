@@ -14,6 +14,7 @@ public class YearListMapper implements ArrayListMapping<Year, EYear> {
             Year year = new Year();
             year.setAcronym(eYear.getAcronym());
             year.setName(eYear.getName());
+            year.setId(eYear.getId());
             yearArrayList.add(year);
         }
         return yearArrayList;

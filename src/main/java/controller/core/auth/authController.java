@@ -4,7 +4,7 @@ import controller.menu.Menu;
 import interfaces.ApiListener;
 import data.mainapi.ESGIPocketProvider;
 import data.model.Authentification;
-import data.model.LoginCredentials;
+import data.model.credentials.LoginCredentials;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;

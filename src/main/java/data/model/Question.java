@@ -2,6 +2,7 @@ package data.model;
 
 public class Question {
 
+    private String id;
     private String content;
     private Quiz quiz;
 
@@ -21,10 +22,19 @@ public class Question {
         this.quiz = quiz;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
-                "content='" + content + '\'' +
+                "id='" + id + '\'' +
+                ", content='" + content + '\'' +
                 ", quiz=" + quiz +
                 '}';
     }

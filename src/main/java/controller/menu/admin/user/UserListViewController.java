@@ -33,4 +33,9 @@ public class UserListViewController extends ListViewController<User> {
             }
         });
     }
+
+    @Override
+    public void setAddCell() {
+
+    }
 }

@@ -26,5 +26,7 @@
             <Font name="Source Sans Pro" size="13.0" />
          </font>
       </Text>
+      <Text fx:id="like" layoutX="292.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" AnchorPane.rightAnchor="50.0" />
+      <Text fx:id="dislike" layoutX="318.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" AnchorPane.rightAnchor="27.0" />
    </children>
 </AnchorPane>

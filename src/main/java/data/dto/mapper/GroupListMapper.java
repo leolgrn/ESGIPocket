@@ -14,6 +14,7 @@ public class GroupListMapper implements ArrayListMapping<Group, EGroup> {
             Group group = new Group();
             group.setName(eGroup.getName());
             group.setNumber(eGroup.getNumber());
+            group.setId(eGroup.getId());
             groupArrayList.add(group);
         }
         return groupArrayList;

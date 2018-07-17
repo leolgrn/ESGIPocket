@@ -16,6 +16,7 @@ public class ClassMapper implements Mapping<Class, EClass> {
         newClass.setGroup(groupMapper.map(item.geteGroup()));
         newClass.setYear(yearMapper.map(item.geteYear()));
         newClass.setTopic(topicListMapper.map(item.getTopics()));
+        newClass.setId(item.getId());
         return newClass;
     }
 }

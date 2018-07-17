@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Class {
 
+    private String id;
     private Year year;
     private Group group;
     private Speciality speciality;
@@ -41,10 +42,27 @@ public class Class {
         this.topics = topics;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ArrayList<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(ArrayList<Topic> topics) {
+        this.topics = topics;
+    }
+
     @Override
     public String toString() {
         return "Class{" +
-                "year=" + year +
+                "id='" + id + '\'' +
+                ", year=" + year +
                 ", group=" + group +
                 ", speciality=" + speciality +
                 ", topics=" + topics +

@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import java.util.ArrayList;
 
 public class SpecialityListViewController extends ListViewController<Speciality> {
+
     public SpecialityListViewController(BorderPane borderPane) {
         super(borderPane, "center");
     }
@@ -30,5 +31,12 @@ public class SpecialityListViewController extends ListViewController<Speciality>
 
             }
         });
+    }
+
+    @Override
+    public void setAddCell() {
+        SpecialityAddCell specialityAddCell = new SpecialityAddCell();
+        specialityAddCell.setAddCell();
+        getBorderPane().setBottom(specialityAddCell.getAnchorPane());
     }
 }

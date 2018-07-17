@@ -29,8 +29,26 @@ public class Menu {
         });
     }
 
+    public BorderPane getBorderPane() {
+        return borderPane;
+    }
+
+    public void setBorderPane(BorderPane borderPane) {
+        this.borderPane = borderPane;
+    }
+
+    public BorderPane getInsideBorderPane() {
+        return insideBorderPane;
+    }
+
+    public void setInsideBorderPane(BorderPane insideBorderPane) {
+        this.insideBorderPane = insideBorderPane;
+    }
+
     public void onHomeClick(MouseEvent mouseEvent) {
-        // TODO
+        borderPane.setBottom(null);
+        insideBorderPane.setLeft(null);
+        insideBorderPane.setCenter(null);
     }
 
     public void onLessonsClick(MouseEvent mouseEvent) {
@@ -41,7 +59,9 @@ public class Menu {
     }
 
     public void onQuizzesClick(MouseEvent mouseEvent) {
-        // TODO
+        borderPane.setBottom(null);
+        insideBorderPane.setLeft(null);
+        insideBorderPane.setCenter(null);
     }
 
     public void onAdminClick(MouseEvent mouseEvent) {

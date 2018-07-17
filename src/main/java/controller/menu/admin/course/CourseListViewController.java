@@ -32,4 +32,9 @@ public class CourseListViewController extends ListViewController<Course> {
             }
         });
     }
+
+    @Override
+    public void setAddCell() {
+
+    }
 }

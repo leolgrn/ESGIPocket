@@ -2,6 +2,7 @@ package data.model;
 
 public class Group {
 
+    private String id;
     private String name;
     private String number;
 
@@ -21,10 +22,19 @@ public class Group {
         this.number = number;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Group{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", number='" + number + '\'' +
                 '}';
     }

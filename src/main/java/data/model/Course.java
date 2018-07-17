@@ -10,6 +10,9 @@ public class Course {
     private Class classe;
     private String updatedAt;
     private String createdAt;
+    private User user;
+    private int like;
+    private int dislike;
 
     public String getTitle() {
         return title;
@@ -75,6 +78,30 @@ public class Course {
         this.content = content;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public int getDislike() {
+        return dislike;
+    }
+
+    public void setDislike(int dislike) {
+        this.dislike = dislike;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -83,9 +110,12 @@ public class Course {
                 ", content='" + content + '\'' +
                 ", id='" + id + '\'' +
                 ", topic=" + topic +
-                ", classe='" + classe + '\'' +
+                ", classe=" + classe +
                 ", updatedAt='" + updatedAt + '\'' +
                 ", createdAt='" + createdAt + '\'' +
+                ", user=" + user +
+                ", like=" + like +
+                ", dislike=" + dislike +
                 '}';
     }
 }

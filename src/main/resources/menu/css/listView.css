@@ -29,6 +29,10 @@
     -fx-text-fill: #ffffff;
 }
 
+.list-cell:empty:hover {
+    -fx-background-color: #303030;
+}
+
 
 .list-cell:filled:selected:focused{
     -fx-padding: 10px;
@@ -38,4 +42,13 @@
 
 .button:filled:selected:focused{
     -fx-background-color: #404040;
+}
+
+.button:hover{
+    -fx-background-color: #404040;
+    -fx-cursor: hand;
+}
+
+.scroll-bar:vertical:disabled {
+    -fx-opacity: 0;
 }

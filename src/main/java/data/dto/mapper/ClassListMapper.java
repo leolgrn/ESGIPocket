@@ -22,6 +22,7 @@ public class ClassListMapper implements ArrayListMapping<Class, EClass> {
             newClass.setGroup(groupMapper.map(eClass.geteGroup()));
             newClass.setYear(yearMapper.map(eClass.geteYear()));
             newClass.setTopic(topicListMapper.map(eClass.getTopics()));
+            newClass.setId(eClass.getId());
             classArrayList.add(newClass);
         }
 

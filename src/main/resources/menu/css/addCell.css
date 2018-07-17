@@ -1,0 +1,8 @@
+#anchorPane{
+    -fx-padding: 10px;
+    -fx-background-color: #404040;
+}
+
+.button:hover{
+    -fx-cursor: hand;
+}

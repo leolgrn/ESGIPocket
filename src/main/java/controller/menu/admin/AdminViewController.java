@@ -25,35 +25,47 @@ public class AdminViewController extends ListViewController<String> {
         });
     }
 
+    @Override
+    public void setAddCell() {
+
+    }
+
     public void loadListView(String item){
         switch (item){
             case "Utilisateurs":
                 UserListViewController userListViewController = new UserListViewController(getBorderPane());
                 userListViewController.setListView();
+                getBorderPane().setBottom(null);
                 break;
             case "Classes":
                 ClassListViewController classListViewController = new ClassListViewController(getBorderPane());
                 classListViewController.setListView();
+                classListViewController.setAddCell();
                 break;
             case "Matières":
                 TopicListViewController topicListViewController = new TopicListViewController(getBorderPane());
                 topicListViewController.setListView();
+                topicListViewController.setAddCell();
                 break;
             case "Cours":
                 CourseListViewController courseListViewController = new CourseListViewController(getBorderPane());
                 courseListViewController.setListView();
+                getBorderPane().setBottom(null);
                 break;
             case "Groupes":
                 GroupListViewController groupListViewController = new GroupListViewController(getBorderPane());
                 groupListViewController.setListView();
+                groupListViewController.setAddCell();
                 break;
             case "Spécialités":
                 SpecialityListViewController specialityListViewController = new SpecialityListViewController(getBorderPane());
                 specialityListViewController.setListView();
+                specialityListViewController.setAddCell();
                 break;
             case "Années":
                 YearListViewController yearListViewController = new YearListViewController(getBorderPane());
                 yearListViewController.setListView();
+                yearListViewController.setAddCell();
                 break;
             default:
                 System.out.println("No model");

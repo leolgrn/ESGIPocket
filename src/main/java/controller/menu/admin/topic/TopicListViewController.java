@@ -32,4 +32,11 @@ public class TopicListViewController extends ListViewController<Topic> {
             }
         });
     }
+
+    @Override
+    public void setAddCell() {
+        TopicAddCell topicAddCell = new TopicAddCell();
+        topicAddCell.setAddCell();
+        getBorderPane().setBottom(topicAddCell.getAnchorPane());
+    }
 }

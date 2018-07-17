@@ -1,15 +1,23 @@
 package controller.menu.admin.user;
 
+import data.mainapi.delete.ESGIPocketProviderDelete;
+import data.model.Authentification;
 import data.model.User;
+import interfaces.ApiListener;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 
 public class UserListCell {
+
+    private ESGIPocketProviderDelete esgiPocketProviderDelete;
 
     @FXML
     private AnchorPane anchorPane;
@@ -32,6 +40,7 @@ public class UserListCell {
     public UserListCell(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/admin/UserListCell.fxml"));
         fxmlLoader.setController(this);
+        esgiPocketProviderDelete = new ESGIPocketProviderDelete(Authentification.getInstance().getToken());
         try
         {
             anchorPane = fxmlLoader.load();
@@ -42,8 +51,7 @@ public class UserListCell {
         }
     }
 
-    public void setInfo(User user)
-    {
+    public void setInfo(User user) {
         firstname.setText(user.getFirstname());
         lastname.setText(user.getLastname());
         email.setText(user.getEmail());
@@ -53,7 +61,21 @@ public class UserListCell {
             activated.setText("Not Activated");
         }
         delete.setOnMouseClicked(event -> {
-            System.out.println(user.getId());
+            esgiPocketProviderDelete.deleteUser(user.getId(), new ApiListener<String>() {
+                @Override
+                public void onSuccess(String response) {
+                    Scene currentScene = getPane().getScene();
+                    Platform.runLater(() -> {
+                        UserListViewController userListViewController = new UserListViewController((BorderPane) currentScene.lookup("#insideBorderPane"));
+                        userListViewController.setListView();
+                    });
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            });
         });
     }
 
