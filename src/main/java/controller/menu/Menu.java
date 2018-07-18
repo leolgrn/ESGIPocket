@@ -2,10 +2,12 @@ package controller.menu;
 
 import controller.menu.admin.AdminViewController;
 import controller.menu.topic.TopicListViewController;
+import data.model.Authentification;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -15,14 +17,39 @@ import java.io.IOException;
 
 public class Menu {
 
+    private Scene scene;
+
     @FXML
     private BorderPane borderPane;
+
     @FXML
     private BorderPane insideBorderPane;
 
-    public void start(Stage stage) throws IOException {
-        borderPane = FXMLLoader.load(getClass().getResource("/menu/menu.fxml"));
-        Scene scene =  new Scene(borderPane, MainSettings.WIDTH, MainSettings.HEIGHT);
+    @FXML
+    private Button admin;
+
+    @FXML
+    private Button quiz;
+
+    @FXML
+    private Button course;
+
+    @FXML
+    private Button home;
+
+    public void start(Stage stage) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/menu.fxml"));
+        fxmlLoader.setController(this);
+        try{
+            borderPane = fxmlLoader.load();
+            borderPane.getStylesheets().add(getClass().getResource("/menu/css/menu.css").toExternalForm());
+            scene = new Scene(borderPane, MainSettings.WIDTH, MainSettings.HEIGHT);
+            if(Authentification.getInstance().getUser().getRole() != MainSettings.ADMIN){
+                admin.setVisible(false);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Platform.runLater(() -> {
             stage.setScene(scene);
             stage.show();

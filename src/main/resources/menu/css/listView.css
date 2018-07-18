@@ -40,6 +40,10 @@
     -fx-text-fill: #ffffff;
 }
 
+.list-view .scroll-bar:vertical {
+    -fx-scale-x: 0;
+}
+
 .button:filled:selected:focused{
     -fx-background-color: #404040;
 }
@@ -51,4 +55,46 @@
 
 .scroll-bar:vertical:disabled {
     -fx-opacity: 0;
+    -fx-padding:-7;
+}
+
+.choice-box{
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+}
+
+.choice-box .context-menu{
+    -fx-background-color: #404040;
+}
+
+.choice-box .menu-item{
+    -fx-background-color: #404040;
+}
+
+.choice-box .menu-item:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #505050;
+}
+
+.choice-box .label{
+    -fx-text-fill: #ffffff;
+}
+
+.combo-box {
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+}
+
+.combo-box .check-box .box {
+    -fx-background-color: #505050;
+}
+
+.text-field{
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
 }

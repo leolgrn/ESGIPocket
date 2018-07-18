@@ -1,6 +1,7 @@
 package abstractclass;
 
 import data.mainapi.delete.ESGIPocketProviderDelete;
+import data.mainapi.put.ESGIPocketProviderPut;
 import data.model.Authentification;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,11 +10,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import javax.naming.AuthenticationNotSupportedException;
 import java.io.IOException;
 
-public abstract class SingleFieldListCell<T> {
+public abstract class TwoFieldListCell<T> {
 
     private ESGIPocketProviderDelete esgiPocketProviderDelete;
+
+    private ESGIPocketProviderPut esgiPocketProviderPut;
 
     @FXML
     private AnchorPane anchorPane;
@@ -22,12 +26,19 @@ public abstract class SingleFieldListCell<T> {
     private TextField name;
 
     @FXML
+    private TextField acronym;
+
+    @FXML
     private Button delete;
 
-    public SingleFieldListCell(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/admin/SingleFieldListCell.fxml"));
+    @FXML
+    private Button update;
+
+    public TwoFieldListCell(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/admin/TwoFieldListCell.fxml"));
         fxmlLoader.setController(this);
         esgiPocketProviderDelete = new ESGIPocketProviderDelete(Authentification.getInstance().getToken());
+        esgiPocketProviderPut = new ESGIPocketProviderPut(Authentification.getInstance().getToken());
         try
         {
             anchorPane = fxmlLoader.load();
@@ -54,11 +65,14 @@ public abstract class SingleFieldListCell<T> {
         return name;
     }
 
-    public void setName(TextField name) {
-        this.name = name;
+    public Button getUpdate() {
+        return update;
+    }
+
+    public TextField getAcronym() {
+        return acronym;
     }
 
     public abstract void setInfo(T object);
-
 
 }

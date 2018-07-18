@@ -6,6 +6,7 @@ import data.mainapi.ESGIPocketProvider;
 import data.model.Authentification;
 import data.model.credentials.LoginCredentials;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -19,7 +20,7 @@ public class authController {
     private TextField email;
 
     @FXML
-    private TextField password;
+    private PasswordField password;
 
     public void onSignInButtonClick(MouseEvent mouseEvent) {
         //LoginCredentials loginCredentials = new LoginCredentials(email.getText(), password.getText());
@@ -30,11 +31,7 @@ public class authController {
                 System.out.println(response.toString());
                 Menu menu = new Menu();
                 Stage currentStage = (Stage) email.getScene().getWindow();
-                try {
-                    menu.start(currentStage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                menu.start(currentStage);
             }
 
             public void onError(Throwable throwable) {

@@ -6,3 +6,44 @@
 .button:hover{
     -fx-cursor: hand;
 }
+
+.choice-box{
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+}
+
+.choice-box .context-menu{
+    -fx-background-color: #404040;
+}
+
+.choice-box .menu-item{
+    -fx-background-color: #404040;
+}
+
+.choice-box .menu-item:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #505050;
+}
+
+.choice-box .label{
+    -fx-text-fill: #ffffff;
+}
+
+.combo-box {
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+}
+
+.combo-box .list-cell {
+     -fx-background-color: #404040;
+     -fx-text-fill: #ffffff;
+}
+
+.combo-box .check-box .box {
+    -fx-background-color: #505050;
+}
+
+.text-field{
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+}

@@ -1,10 +1,7 @@
 package interfaces;
 
 import data.dto.*;
-import data.model.credentials.ClassCredentials;
-import data.model.credentials.LoginCredentials;
-import data.model.credentials.TopicCredentials;
-import data.model.credentials.TwoFieldsCredentials;
+import data.model.credentials.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -69,8 +66,38 @@ public interface ESGIPocketService {
     Call<ETopic> postTopic(@Body TopicCredentials topicCredentials);
 
     @Headers("Content-Type: application/json")
-    @POST("topics")
+    @POST("classes")
     Call<EClass> postClass(@Body ClassCredentials classCredentials);
+
+    // PUT Methods
+
+    @Headers("Content-Type: application/json")
+    @PUT("users/{id}")
+    Call<EUser> updateUser(@Body UserCredentials userCredentials, @Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @PUT("courses/{id}")
+    Call<ECourse> updateCourse(@Body CourseCredentials courseCredentials, @Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @PUT("years/{id}")
+    Call<EYear> updateYear(@Body TwoFieldsCredentials twoFieldsCredentials, @Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @PUT("specialities/{id}")
+    Call<ESpeciality> updateSpeciality(@Body TwoFieldsCredentials twoFieldsCredentials, @Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @PUT("groups/{id}")
+    Call<EGroup> updateGroup(@Body TwoFieldsCredentials twoFieldsCredentials, @Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @PUT("topics/{id}")
+    Call<ETopic> updateTopic(@Body TopicCredentials topicCredentials, @Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @PUT("classes/{id}")
+    Call<EClass> updateClass(@Body ClassCredentials classCredentials, @Path("id") String id);
 
     // DELETE Methods
 

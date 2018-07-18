@@ -79,6 +79,7 @@ public class ESGIPocketProviderPost extends ESGIPocketProvider {
             @Override
             public void onResponse(Call<EClass> call, Response<EClass> response) {
                 if(listener != null){
+                    System.out.println(response.toString());
                     ClassMapper classMapper = new ClassMapper();
                     Class classe = classMapper.map(response.body());
                     listener.onSuccess(classe);

@@ -3,16 +3,21 @@ package controller.menu.admin.classes;
 import data.mainapi.ESGIPocketProvider;
 import data.mainapi.post.ESGIPocketProviderPost;
 import data.model.*;
+import data.model.Class;
 import data.model.credentials.ClassCredentials;
 import interfaces.ApiListener;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
+import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +41,7 @@ public class ClassAddCell {
     private ChoiceBox<Speciality> speciality;
 
     @FXML
-    private ComboBox<Topic> topics;
+    private CheckComboBox<Topic> topics;
 
     @FXML
     private Button add;
@@ -62,6 +67,38 @@ public class ClassAddCell {
         this.anchorPane = anchorPane;
     }
 
+    public ChoiceBox<Year> getYear() {
+        return year;
+    }
+
+    public void setYear(ChoiceBox<Year> year) {
+        this.year = year;
+    }
+
+    public ChoiceBox<Group> getGroup() {
+        return group;
+    }
+
+    public void setGroup(ChoiceBox<Group> group) {
+        this.group = group;
+    }
+
+    public ChoiceBox<Speciality> getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(ChoiceBox<Speciality> speciality) {
+        this.speciality = speciality;
+    }
+
+    public CheckComboBox<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(CheckComboBox<Topic> topics) {
+        this.topics = topics;
+    }
+
     public void setAddCell(){
         setYear();
         setGroup();
@@ -71,10 +108,28 @@ public class ClassAddCell {
             String year = this.year.getSelectionModel().getSelectedItem().getId();
             String group = this.group.getSelectionModel().getSelectedItem().getId();
             String speciality = this.speciality.getSelectionModel().getSelectedItem().getId();
-            System.out.println(year);
-            System.out.println(group);
-            System.out.println(speciality);
-            //ClassCredentials classCredentials = new ClassCredentials(year, group, speciality);
+            ObservableList<Topic> topics = this.topics.getCheckModel().getCheckedItems();
+            String[] topicsArray = new String[topics.size()];
+            for(int i = 0; i < topics.size(); i++){
+                topicsArray[i] = topics.get(i).getId();
+            }
+            ClassCredentials classCredentials = new ClassCredentials(year, group, speciality, topicsArray);
+            esgiPocketProviderPost.postClass(classCredentials, new ApiListener<Class>() {
+                @Override
+                public void onSuccess(Class response) {
+                    Scene currentScene = getAnchorPane().getScene();
+                    Platform.runLater(() -> {
+                        ClassListViewController classListViewController = new ClassListViewController((BorderPane) currentScene.lookup("#insideBorderPane"));
+                        classListViewController.setListView();
+                        classListViewController.setAddCell();
+                    });
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            });
         });
     }
 
@@ -161,7 +216,7 @@ public class ClassAddCell {
             @Override
             public void onSuccess(ArrayList<Topic> response) {
                 ObservableList<Topic> observableList = FXCollections.observableArrayList(response);
-                topics.setItems(observableList);
+                topics.getItems().addAll(observableList);
                 topics.setConverter(new StringConverter<Topic>() {
                     @Override
                     public String toString(Topic object) {
