@@ -13,9 +13,9 @@ public class ClassCell extends ListCell<Class> {
         super.updateItem(newClass, empty);
         if(newClass != null){
             ClassListCell classListCell = new ClassListCell();
-            classListCell.setInfo(newClass);
+            classListCell.setCell(newClass);
             Platform.runLater(() -> {
-                setGraphic(classListCell.getPane());
+                setGraphic(classListCell.getAnchorPane());
             });
         }
     }

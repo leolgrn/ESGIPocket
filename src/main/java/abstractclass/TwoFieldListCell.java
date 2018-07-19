@@ -73,6 +73,12 @@ public abstract class TwoFieldListCell<T> {
         return acronym;
     }
 
+    public ESGIPocketProviderPut getEsgiPocketProviderPut() {
+        return esgiPocketProviderPut;
+    }
+
     public abstract void setInfo(T object);
+
+    public abstract void reload();
 
 }

@@ -39,7 +39,7 @@ public abstract class ListViewController<T> {
         try
         {
             this.listView = fxmlLoader.load();
-            this.listView.getStylesheets().add(getClass().getResource("/menu/css/listView.css").toExternalForm());
+            this.listView.getStylesheets().add(getClass().getResource("/menu/css/listViewContent.css").toExternalForm());
             setListViewInBorderPane(placement);
         }
         catch (IOException e)

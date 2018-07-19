@@ -1,5 +1,7 @@
 package data.model;
 
+import java.util.Objects;
+
 public class Group {
 
     private String id;
@@ -28,6 +30,21 @@ public class Group {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return Objects.equals(id, group.id) &&
+                Objects.equals(name, group.name) &&
+                Objects.equals(number, group.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, number);
     }
 
     @Override

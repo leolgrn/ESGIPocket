@@ -5,9 +5,7 @@ import data.dto.mapper.*;
 import data.mainapi.ESGIPocketProvider;
 import data.model.*;
 import data.model.Class;
-import data.model.credentials.ClassCredentials;
-import data.model.credentials.TopicCredentials;
-import data.model.credentials.TwoFieldsCredentials;
+import data.model.credentials.*;
 import interfaces.ApiListener;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -106,6 +104,78 @@ public class ESGIPocketProviderPost extends ESGIPocketProvider {
 
             @Override
             public void onFailure(Call<ETopic> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void postQuiz(QuizCredentials quizCredentials, final ApiListener<Quiz> listener){
+        getEsgiPocketService().postQuiz(quizCredentials).enqueue(new Callback<EQuiz>() {
+            @Override
+            public void onResponse(Call<EQuiz> call, Response<EQuiz> response) {
+                if(listener != null){
+                    QuizzMapper quizMapper = new QuizzMapper();
+                    Quiz quiz = quizMapper.map(response.body());
+                    listener.onSuccess(quiz);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EQuiz> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void postQuestion(QuestionCredentials questionCredentials, final ApiListener<Question> listener){
+        getEsgiPocketService().postQuestion(questionCredentials).enqueue(new Callback<EQuestion>() {
+            @Override
+            public void onResponse(Call<EQuestion> call, Response<EQuestion> response) {
+                if(listener != null){
+                    QuestionMapper questionMapper = new QuestionMapper();
+                    Question question = questionMapper.map(response.body());
+                    listener.onSuccess(question);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EQuestion> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void postAnswer(AnswerCredentials answerCredentials, final ApiListener<Answer> listener){
+        getEsgiPocketService().postAnswer(answerCredentials).enqueue(new Callback<EAnswer>() {
+            @Override
+            public void onResponse(Call<EAnswer> call, Response<EAnswer> response) {
+                if(listener != null){
+                    AnswerMapper answerMapper = new AnswerMapper();
+                    Answer answer = answerMapper.map(response.body());
+                    listener.onSuccess(answer);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EAnswer> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void postCourse(CourseCredentials courseCredentials, final ApiListener<Course> listener){
+        getEsgiPocketService().postCourse(courseCredentials).enqueue(new Callback<ECourse>() {
+            @Override
+            public void onResponse(Call<ECourse> call, Response<ECourse> response) {
+                if(listener != null){
+                    CourseMapper courseMapper = new CourseMapper();
+                    Course course = courseMapper.map(response.body());
+                    listener.onSuccess(course);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ECourse> call, Throwable throwable) {
                 if (listener != null) listener.onError(throwable);
             }
         });

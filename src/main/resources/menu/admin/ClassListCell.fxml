@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane fx:id="anchorPane" minWidth="500.0" prefHeight="61.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" minWidth="500.0" prefHeight="61.0" prefWidth="990.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="speciality" fill="WHITE" layoutX="52.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speciality" AnchorPane.leftAnchor="20.0" />
-      <Text fx:id="group" fill="WHITE" layoutX="541.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="G" AnchorPane.leftAnchor="230.0" />
-      <Text fx:id="year" fill="WHITE" layoutX="572.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" AnchorPane.leftAnchor="270.0" />
-      <Button fx:id="delete" layoutX="673.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-text-fill: #ffffff;" text="Supprimer" prefWidth="85" AnchorPane.rightAnchor="20.0" />
+       <Button fx:id="delete" layoutX="673.0" layoutY="17.0" mnemonicParsing="false" prefWidth="85" style="-fx-background-color: red; -fx-text-fill: #ffffff;" text="Supprimer" AnchorPane.rightAnchor="20.0" />
+       <Button fx:id="update" layoutX="885.0" layoutY="17.0" mnemonicParsing="false" prefWidth="85" style="-fx-background-color: orange; -fx-text-fill: #ffffff;" text="Modifier" AnchorPane.rightAnchor="120.0" />
+      <ChoiceBox fx:id="year" layoutX="14.0" layoutY="17.0" prefWidth="150.0" AnchorPane.leftAnchor="20.0" />
+      <ChoiceBox fx:id="group" layoutX="184.0" layoutY="17.0" prefHeight="27.0" prefWidth="82.0" AnchorPane.leftAnchor="190.0" />
+      <ChoiceBox fx:id="speciality" layoutX="288.0" layoutY="17.0" prefHeight="27.0" prefWidth="217.0" AnchorPane.leftAnchor="293.0" />
+      <CheckComboBox fx:id="topics" id="check-combo-box" layoutX="410.0" layoutY="17.0" prefWidth="191.0" AnchorPane.leftAnchor="531.0" />
    </children>
 </AnchorPane>

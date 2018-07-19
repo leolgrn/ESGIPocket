@@ -3,8 +3,9 @@ package data.model;
 public class Course {
 
     private String title;
-    private String archive;
+    private Boolean archive;
     private String content;
+    private String url;
     private String id;
     private Topic topic;
     private Class classe;
@@ -22,11 +23,11 @@ public class Course {
         this.title = title;
     }
 
-    public String getArchive() {
+    public Boolean getArchive() {
         return archive;
     }
 
-    public void setArchive(String archive) {
+    public void setArchive(Boolean archive) {
         this.archive = archive;
     }
 
@@ -48,6 +49,10 @@ public class Course {
 
     public Class getClasse() {
         return classe;
+    }
+
+    public void setClasse(Class classe) {
+        this.classe = classe;
     }
 
     public void setClass(Class classe) {
@@ -102,12 +107,21 @@ public class Course {
         this.dislike = dislike;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
                 "title='" + title + '\'' +
-                ", archive='" + archive + '\'' +
+                ", archive=" + archive +
                 ", content='" + content + '\'' +
+                ", url='" + url + '\'' +
                 ", id='" + id + '\'' +
                 ", topic=" + topic +
                 ", classe=" + classe +

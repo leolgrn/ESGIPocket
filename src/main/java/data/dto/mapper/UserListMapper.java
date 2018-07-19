@@ -22,9 +22,10 @@ public class UserListMapper implements ArrayListMapping<User, EUser> {
             //user.setActivationCode(eUser.getActivationCode());
             user.setActivated(eUser.getActivated());
             user.setRole(eUser.getRole());
-            user.setClasse(classMapper.map(eUser.getClasse()));
+            if (eUser.getClasse() != null){
+                user.setClasse(classMapper.map(eUser.getClasse()));
+            }
             user.setId(eUser.getId());
-
             userArrayList.add(user);
         }
         return userArrayList;

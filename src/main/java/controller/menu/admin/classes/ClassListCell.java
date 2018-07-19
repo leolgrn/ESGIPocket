@@ -1,66 +1,78 @@
 package controller.menu.admin.classes;
 
 import data.mainapi.delete.ESGIPocketProviderDelete;
+import data.mainapi.put.ESGIPocketProviderPut;
 import data.model.Authentification;
 import data.model.Class;
+import data.model.Topic;
+import data.model.Year;
+import data.model.credentials.ClassCredentials;
 import interfaces.ApiListener;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-public class ClassListCell {
+public class ClassListCell extends abstractclass.ClassListCell {
 
     private ESGIPocketProviderDelete esgiPocketProviderDelete;
 
-    @FXML
-    private AnchorPane anchorPane;
-
-    @FXML
-    private Text speciality;
-
-    @FXML
-    private Text group;
-
-    @FXML
-    private Text year;
+    private ESGIPocketProviderPut esgiPocketProviderPut;
 
     @FXML
     private Button delete;
 
+    @FXML
+    private Button update;
+
     public ClassListCell(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/admin/ClassListCell.fxml"));
-        fxmlLoader.setController(this);
+        super("/menu/admin/ClassListCell.fxml", false);
         esgiPocketProviderDelete = new ESGIPocketProviderDelete(Authentification.getInstance().getToken());
-        try
-        {
-            anchorPane = fxmlLoader.load();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+        esgiPocketProviderPut = new ESGIPocketProviderPut(Authentification.getInstance().getToken());
     }
 
-    public void setInfo(Class newClass) {
-        speciality.setText(newClass.getSpeciality().getName());
-        group.setText(newClass.getGroup().getName());
-        year.setText(newClass.getYear().getName());
+    @Override
+    public void setCell(Class newClass) {
+        getAnchorPane().setId("class-list-cell");
+        setYear(true, newClass);
+        setGroup(true, newClass);
+        setSpeciality(true, newClass);
+        setTopics(true, newClass);
         delete.setOnMouseClicked(event -> {
             esgiPocketProviderDelete.deleteClass(newClass.getId(), new ApiListener<String>() {
                 @Override
                 public void onSuccess(String response) {
-                    Scene currentScene = getPane().getScene();
-                    Platform.runLater(() -> {
-                        ClassListViewController classListViewController = new ClassListViewController((BorderPane) currentScene.lookup("#insideBorderPane"));
-                        classListViewController.setListView();
-                    });
+                    reload();
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            });
+        });
+        update.setOnMouseClicked(event -> {
+            String year = getYear().getSelectionModel().getSelectedItem().getId();
+            String group = getGroup().getSelectionModel().getSelectedItem().getId();
+            String speciality = getSpeciality().getSelectionModel().getSelectedItem().getId();
+            ObservableList<Topic> topics = getTopics().getCheckModel().getCheckedItems();
+            String[] topicsArray = new String[topics.size()];
+            for(int i = 0; i < topics.size(); i++){
+                topicsArray[i] = topics.get(i).getId();
+            }
+            ClassCredentials classCredentials = new ClassCredentials(year, group, speciality, topicsArray);
+            esgiPocketProviderPut.updateClass(classCredentials, newClass.getId(), new ApiListener<Class>() {
+                @Override
+                public void onSuccess(Class response) {
+                    reload();
                 }
 
                 @Override
@@ -71,7 +83,12 @@ public class ClassListCell {
         });
     }
 
-    public AnchorPane getPane(){
-        return anchorPane;
+    @Override
+    public void reload() {
+        Scene currentScene = getAnchorPane().getScene();
+        Platform.runLater(() -> {
+            ClassListViewController classListViewController = new ClassListViewController((BorderPane) currentScene.lookup("#insideBorderPane"));
+            classListViewController.setListView();
+        });
     }
 }

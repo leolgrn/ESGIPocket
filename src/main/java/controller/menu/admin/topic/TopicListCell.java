@@ -2,6 +2,7 @@ package controller.menu.admin.topic;
 
 import abstractclass.SingleFieldListCell;
 import data.model.Topic;
+import data.model.credentials.TopicCredentials;
 import interfaces.ApiListener;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -22,11 +23,22 @@ public class TopicListCell extends SingleFieldListCell<Topic> {
             getEsgiPocketProviderDelete().deleteTopic(object.getId(), new ApiListener<String>() {
                 @Override
                 public void onSuccess(String response) {
-                    Scene currentScene = getPane().getScene();
-                    Platform.runLater(() -> {
-                        TopicListViewController topicListViewController = new TopicListViewController((BorderPane) currentScene.lookup("#insideBorderPane"));
-                        topicListViewController.setListView();
-                    });
+                    reload();
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            });
+        });
+        getUpdate().setOnMouseClicked(event -> {
+            String name = getName().getText();
+            TopicCredentials topicCredentials = new TopicCredentials(name);
+            getEsgiPocketProviderPut().updateTopic(topicCredentials, object.getId(), new ApiListener<Topic>() {
+                @Override
+                public void onSuccess(Topic response) {
+                    reload();
                 }
 
                 @Override
@@ -36,4 +48,15 @@ public class TopicListCell extends SingleFieldListCell<Topic> {
             });
         });
     }
+
+    @Override
+    public void reload() {
+        Scene currentScene = getPane().getScene();
+        Platform.runLater(() -> {
+            TopicListViewController topicListViewController = new TopicListViewController((BorderPane) currentScene.lookup("#insideBorderPane"));
+            topicListViewController.setListView();
+        });
+    }
+
+
 }

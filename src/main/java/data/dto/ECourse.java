@@ -5,8 +5,9 @@ import com.google.gson.annotations.SerializedName;
 public class ECourse {
 
     @SerializedName("title") private String title;
-    @SerializedName("archive") private String archive;
+    @SerializedName("archive") private Boolean archive;
     @SerializedName("content") private String content;
+    @SerializedName("url") private String url;
     @SerializedName("_id") private String id;
     @SerializedName("topic") private ETopic topic;
     @SerializedName("class") private EClass classe;
@@ -24,11 +25,11 @@ public class ECourse {
         this.title = title;
     }
 
-    public String getArchive() {
+    public Boolean getArchive() {
         return archive;
     }
 
-    public void setArchive(String archive) {
+    public void setArchive(Boolean archive) {
         this.archive = archive;
     }
 
@@ -104,12 +105,21 @@ public class ECourse {
         this.dislike = dislike;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "ECourse{" +
                 "title='" + title + '\'' +
-                ", archive='" + archive + '\'' +
+                ", archive=" + archive +
                 ", content='" + content + '\'' +
+                ", url='" + url + '\'' +
                 ", id='" + id + '\'' +
                 ", topic=" + topic +
                 ", classe=" + classe +

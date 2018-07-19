@@ -40,6 +40,18 @@ public interface ESGIPocketService {
     Call<ArrayList<ESpeciality>> getSpecialities();
 
     @Headers("Content-Type: application/json")
+    @GET("quizzes")
+    Call<ArrayList<EQuiz>> getQuizzes();
+
+    @Headers("Content-Type: application/json")
+    @GET("questions")
+    Call<ArrayList<EQuestion>> getQuestions();
+
+    @Headers("Content-Type: application/json")
+    @GET("answers")
+    Call<ArrayList<EAnswer>> getAnswers();
+
+    @Headers("Content-Type: application/json")
     @GET("topics/{id}/courses")
     Call<ArrayList<ECourse>> getCoursesById(@Path("id") String id);
 
@@ -69,6 +81,22 @@ public interface ESGIPocketService {
     @POST("classes")
     Call<EClass> postClass(@Body ClassCredentials classCredentials);
 
+    @Headers("Content-Type: application/json")
+    @POST("courses")
+    Call<ECourse> postCourse(@Body CourseCredentials courseCredentials);
+
+    @Headers("Content-Type: application/json")
+    @POST("quizzes")
+    Call<EQuiz> postQuiz(@Body QuizCredentials quizCredentials);
+
+    @Headers("Content-Type: application/json")
+    @POST("questions")
+    Call<EQuestion> postQuestion(@Body QuestionCredentials questionCredentials);
+
+    @Headers("Content-Type: application/json")
+    @POST("answers")
+    Call<EAnswer> postAnswer(@Body AnswerCredentials answerCredentials);
+
     // PUT Methods
 
     @Headers("Content-Type: application/json")
@@ -89,7 +117,7 @@ public interface ESGIPocketService {
 
     @Headers("Content-Type: application/json")
     @PUT("groups/{id}")
-    Call<EGroup> updateGroup(@Body TwoFieldsCredentials twoFieldsCredentials, @Path("id") String id);
+    Call<EGroup> updateGroup(@Body GroupCredentials groupCredentials, @Path("id") String id);
 
     @Headers("Content-Type: application/json")
     @PUT("topics/{id}")
@@ -98,6 +126,18 @@ public interface ESGIPocketService {
     @Headers("Content-Type: application/json")
     @PUT("classes/{id}")
     Call<EClass> updateClass(@Body ClassCredentials classCredentials, @Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @PUT("quizzes/{id}")
+    Call<EQuiz> updateQuiz(@Body QuizCredentials quizCredentials, @Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @PUT("questions/{id}")
+    Call<EQuestion> updateQuestion(@Body QuestionCredentials questionCredentials, @Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @PUT("answers/{id}")
+    Call<EAnswer> updateAnswer(@Body AnswerCredentials answerCredentials, @Path("id") String id);
 
     // DELETE Methods
 
@@ -128,6 +168,18 @@ public interface ESGIPocketService {
     @Headers("Content-Type: application/json")
     @DELETE("specialities/{id}")
     Call<Void> deleteSpeciality(@Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @DELETE("quizzes/{id}")
+    Call<Void> deleteQuiz(@Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @DELETE("questions/{id}")
+    Call<Void> deleteQuestion(@Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @DELETE("answers/{id}")
+    Call<Void> deleteAnswer(@Path("id") String id);
 
 
 }

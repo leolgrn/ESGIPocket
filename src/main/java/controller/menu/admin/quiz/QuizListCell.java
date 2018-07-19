@@ -1,12 +1,12 @@
-package controller.menu.admin.course;
+package controller.menu.admin.quiz;
 
 import data.mainapi.ESGIPocketProvider;
 import data.mainapi.delete.ESGIPocketProviderDelete;
 import data.mainapi.put.ESGIPocketProviderPut;
 import data.model.Authentification;
-import data.model.Course;
+import data.model.Quiz;
 import data.model.Topic;
-import data.model.credentials.CourseCredentials;
+import data.model.credentials.QuizCredentials;
 import interfaces.ApiListener;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -16,33 +16,30 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CourseListCell {
-
-    private ESGIPocketProvider esgiPocketProvider;
+public class QuizListCell {
 
     private ESGIPocketProviderDelete esgiPocketProviderDelete;
 
     private ESGIPocketProviderPut esgiPocketProviderPut;
 
+    private ESGIPocketProvider esgiPocketProvider;
+
     @FXML
     private AnchorPane anchorPane;
 
     @FXML
-    private TextField title;
+    private Text name;
 
     @FXML
     private ChoiceBox<Topic> topic;
-
-    @FXML
-    private ChoiceBox<String> archive;
 
     @FXML
     private Button update;
@@ -50,8 +47,8 @@ public class CourseListCell {
     @FXML
     private Button delete;
 
-    public CourseListCell(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/admin/CourseListCell.fxml"));
+    public QuizListCell(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/admin/QuizListCell.fxml"));
         fxmlLoader.setController(this);
         String token = Authentification.getInstance().getToken();
         esgiPocketProviderDelete = new ESGIPocketProviderDelete(token);
@@ -67,31 +64,45 @@ public class CourseListCell {
         }
     }
 
-    public AnchorPane getPane(){
+    public ESGIPocketProviderDelete getEsgiPocketProviderDelete() {
+        return esgiPocketProviderDelete;
+    }
+
+    public ESGIPocketProviderPut getEsgiPocketProviderPut() {
+        return esgiPocketProviderPut;
+    }
+
+    public ESGIPocketProvider getEsgiPocketProvider() {
+        return esgiPocketProvider;
+    }
+
+    public AnchorPane getAnchorPane() {
         return anchorPane;
     }
 
-    public TextField getTitle() {
-        return title;
+    public Text getName() {
+        return name;
     }
 
     public ChoiceBox<Topic> getTopic() {
         return topic;
     }
 
-    public ChoiceBox<String> getArchive() {
-        return archive;
+    public Button getUpdate() {
+        return update;
     }
 
-    public void setInfo(Course course) {
-        title.setText(course.getTitle());
-        setTopic(course);
-        setArchive(course);
+    public Button getDelete() {
+        return delete;
+    }
+
+    public void setInfo(Quiz quiz){
+        setTopic(quiz);
         delete.setOnMouseClicked(event -> {
-            esgiPocketProviderDelete.deleteCourse(course.getId(), new ApiListener<String>() {
+            getEsgiPocketProviderDelete().deleteQuiz(quiz.getId(), new ApiListener<String>() {
                 @Override
                 public void onSuccess(String response) {
-                   reload();
+                    reload();
                 }
 
                 @Override
@@ -101,15 +112,12 @@ public class CourseListCell {
             });
         });
         update.setOnMouseClicked(event -> {
-            String title = getTitle().getText();
+            String name = getName().getText();
             String topic = getTopic().getSelectionModel().getSelectedItem().getId();
-            Boolean archive = null;
-            if(getArchive().getSelectionModel().getSelectedItem().equals("Archive")) archive = true;
-            else archive = false;
-            CourseCredentials courseCredentials = new CourseCredentials(title, topic, archive);
-            esgiPocketProviderPut.updateCourse(courseCredentials, course.getId(), new ApiListener<Course>() {
+            QuizCredentials quizCredentials = new QuizCredentials(name, topic);
+            getEsgiPocketProviderPut().updateQuiz(quizCredentials, quiz.getId(), new ApiListener<Quiz>() {
                 @Override
-                public void onSuccess(Course response) {
+                public void onSuccess(Quiz response) {
                     reload();
                 }
 
@@ -121,13 +129,13 @@ public class CourseListCell {
         });
     }
 
-    public void setTopic(Course course){
-        esgiPocketProvider.getTopics(new ApiListener<ArrayList<Topic>>() {
+    public void setTopic(Quiz quiz){
+        getEsgiPocketProvider().getTopics(new ApiListener<ArrayList<Topic>>() {
             @Override
             public void onSuccess(ArrayList<Topic> response) {
                 ObservableList<Topic> observableList = FXCollections.observableArrayList(response);
-                topic.setItems(observableList);
-                topic.setConverter(new StringConverter<Topic>() {
+                getTopic().setItems(observableList);
+                getTopic().setConverter(new StringConverter<Topic>() {
                     @Override
                     public String toString(Topic object) {
                         return object.getName();
@@ -141,7 +149,7 @@ public class CourseListCell {
                 Platform.runLater(() -> {
                     int index = 0;
                     for(int i = 0; i < topic.getItems().size(); i++){
-                        if(topic.getItems().get(i).equals(course.getTopic())){
+                        if(topic.getItems().get(i).equals(quiz.getTopic())){
                             index = i;
                         }
                     }
@@ -156,20 +164,12 @@ public class CourseListCell {
         });
     }
 
-    public void setArchive(Course course){
-        ObservableList<String> observableList = FXCollections.observableArrayList("Archive", "En cours");
-        archive.setItems(observableList);
-        if(course.getArchive()) archive.getSelectionModel().select(0);
-        else archive.getSelectionModel().select(1);
-    }
-
     public void reload(){
-        Scene currentScene = getPane().getScene();
+        Scene currentScene = getAnchorPane().getScene();
         Platform.runLater(() -> {
-            CourseListViewController courseListViewController = new CourseListViewController((BorderPane) currentScene.lookup("#insideBorderPane"));
-            courseListViewController.setListView();
+            QuizListViewController quizListViewController = new QuizListViewController((BorderPane) currentScene.lookup("#insideBorderPane"));
+            quizListViewController.setListView();
         });
     }
-
 
 }

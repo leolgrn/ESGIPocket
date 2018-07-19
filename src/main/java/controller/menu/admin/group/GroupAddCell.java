@@ -13,7 +13,7 @@ public class GroupAddCell extends TwoFieldAddCell<Group> {
     @Override
     public void setAddCell() {
         getName().setPromptText("Nom");
-        getAcronym().setPromptText("Acronyme");
+        getAcronym().setPromptText("Nombre");
         getAdd().setOnMouseClicked(event -> {
             TwoFieldsCredentials twoFieldsCredentials = new TwoFieldsCredentials(getName().getText(), getAcronym().getText());
             getEsgiPocketProviderPost().postGroup(twoFieldsCredentials, new ApiListener<Group>() {

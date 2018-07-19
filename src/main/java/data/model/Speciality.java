@@ -1,5 +1,7 @@
 package data.model;
 
+import java.util.Objects;
+
 public class Speciality {
 
     private String id;
@@ -28,6 +30,22 @@ public class Speciality {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Speciality that = (Speciality) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(acronym, that.acronym);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, name, acronym);
     }
 
     @Override

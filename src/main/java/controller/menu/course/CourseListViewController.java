@@ -50,12 +50,14 @@ public class CourseListViewController extends ListViewController<Course> {
 
     public void setListCellEvent(){
         getListView().setOnMouseClicked(event -> {
-            try {
-                URL url = new URL(getListView().getSelectionModel().getSelectedItem().getContent());
-                readPdf(url);
-                openPdf();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+            if(getListView().getSelectionModel().getSelectedItem().getContent() == null){
+                try {
+                    URL url = new URL(getListView().getSelectionModel().getSelectedItem().getUrl());
+                    readPdf(url);
+                    openPdf();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

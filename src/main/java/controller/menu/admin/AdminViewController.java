@@ -4,6 +4,7 @@ import abstractclass.ListViewController;
 import controller.menu.admin.classes.ClassListViewController;
 import controller.menu.admin.course.CourseListViewController;
 import controller.menu.admin.group.GroupListViewController;
+import controller.menu.admin.quiz.QuizListViewController;
 import controller.menu.admin.speciality.SpecialityListViewController;
 import controller.menu.admin.topic.TopicListViewController;
 import controller.menu.admin.user.UserListViewController;
@@ -13,12 +14,12 @@ import javafx.scene.layout.BorderPane;
 public class AdminViewController extends ListViewController<String> {
 
     public AdminViewController(BorderPane borderPane){
-        super(borderPane, "left");
+        super(borderPane, "left", "/menu/css/listView.css");
     }
 
     @Override
     public void setListView() {
-        getObservableList().setAll("Utilisateurs", "Classes", "Matières", "Cours", "Groupes", "Années", "Spécialités");
+        getObservableList().setAll("Utilisateurs", "Classes", "Matières", "Cours", "Groupes", "Années", "Spécialités", "Quiz");
         getListView().setItems(getObservableList());
         getListView().setOnMouseClicked(event -> {
             loadListView(getListView().getSelectionModel().getSelectedItem());
@@ -66,6 +67,12 @@ public class AdminViewController extends ListViewController<String> {
                 YearListViewController yearListViewController = new YearListViewController(getBorderPane());
                 yearListViewController.setListView();
                 yearListViewController.setAddCell();
+                break;
+            case "Quiz":
+                QuizListViewController quizListViewController = new QuizListViewController(getBorderPane());
+                quizListViewController.setListView();
+                quizListViewController.setAddCell();
+                getBorderPane().setBottom(null);
                 break;
             default:
                 System.out.println("No model");

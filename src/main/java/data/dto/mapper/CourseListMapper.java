@@ -27,6 +27,7 @@ public class CourseListMapper implements ArrayListMapping<Course, ECourse> {
             course.setUser(userMapper.map(eCourse.getUser()));
             course.setLike(eCourse.getLike());
             course.setDislike(eCourse.getDislike());
+            course.setUrl(eCourse.getUrl());
             CourseList.add(course);
         }
         return CourseList;

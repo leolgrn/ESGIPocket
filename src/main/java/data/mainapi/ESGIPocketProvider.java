@@ -226,4 +226,58 @@ public class ESGIPocketProvider {
             }
         });
     }
+
+    public void getQuizzes(final ApiListener<ArrayList<Quiz>> listener){
+        esgiPocketService.getQuizzes().enqueue(new Callback<ArrayList<EQuiz>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EQuiz>> call, Response<ArrayList<EQuiz>> response) {
+                if(listener != null){
+                    QuizListMapper quizListMapper = new QuizListMapper();
+                    ArrayList<Quiz> quizArrayList = quizListMapper.map(response.body());
+                    listener.onSuccess(quizArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EQuiz>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getQuestions(final ApiListener<ArrayList<Question>> listener){
+        esgiPocketService.getQuestions().enqueue(new Callback<ArrayList<EQuestion>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EQuestion>> call, Response<ArrayList<EQuestion>> response) {
+                if(listener != null){
+                    QuestionListMapper questionListMapper = new QuestionListMapper();
+                    ArrayList<Question> questionArrayList = questionListMapper.map(response.body());
+                    listener.onSuccess(questionArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EQuestion>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getAnswers(final ApiListener<ArrayList<Answer>> listener){
+        esgiPocketService.getAnswers().enqueue(new Callback<ArrayList<EAnswer>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EAnswer>> call, Response<ArrayList<EAnswer>> response) {
+                if(listener != null){
+                    AnswerListMapper answerListMapper = new AnswerListMapper();
+                    ArrayList<Answer> answerArrayList = answerListMapper.map(response.body());
+                    listener.onSuccess(answerArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EAnswer>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
 }

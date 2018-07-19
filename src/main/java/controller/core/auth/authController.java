@@ -23,8 +23,8 @@ public class authController {
     private PasswordField password;
 
     public void onSignInButtonClick(MouseEvent mouseEvent) {
-        //LoginCredentials loginCredentials = new LoginCredentials(email.getText(), password.getText());
-        LoginCredentials loginCredentials = new LoginCredentials(MainSettings.mail, MainSettings.password);
+        LoginCredentials loginCredentials = new LoginCredentials(email.getText(), password.getText());
+        //LoginCredentials loginCredentials = new LoginCredentials(MainSettings.mail, MainSettings.password);
         ESGIPocketProvider esgiPocketProvider = new ESGIPocketProvider();
         esgiPocketProvider.postLogIn(loginCredentials, new ApiListener<Authentification>() {
             public void onSuccess(Authentification response) {

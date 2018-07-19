@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 public class TopicListViewController extends ListViewController<Topic> {
 
     public TopicListViewController(BorderPane borderPane) {
-        super(borderPane, "left");
+        super(borderPane, "left", "/menu/css/listView.css");
     }
 
     @Override

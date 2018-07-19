@@ -23,6 +23,7 @@ public class CourseMapper implements Mapping<Course, ECourse> {
         course.setUser(userMapper.map(item.getUser()));
         course.setLike(item.getLike());
         course.setDislike(item.getDislike());
+        course.setUrl(item.getUrl());
         return course;
     }
 }

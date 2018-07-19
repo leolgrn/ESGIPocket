@@ -109,4 +109,46 @@ public class ESGIPocketProviderDelete extends ESGIPocketProvider {
             }
         });
     }
+
+    public void deleteQuiz(String id, final ApiListener<String> listener){
+        getEsgiPocketService().deleteQuiz(id).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(listener != null){ listener.onSuccess("item deleted");}
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void deleteQuestion(String id, final ApiListener<String> listener){
+        getEsgiPocketService().deleteQuestion(id).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(listener != null){ listener.onSuccess("item deleted");}
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void deleteAnswer(String id, final ApiListener<String> listener){
+        getEsgiPocketService().deleteAnswer(id).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(listener != null){ listener.onSuccess("item deleted");}
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
 }
