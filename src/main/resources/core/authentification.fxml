@@ -12,7 +12,7 @@
    <center>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="237.0" prefWidth="443.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="480.0" layoutY="138.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="265.0" prefWidth="530.0" AnchorPane.leftAnchor="480.0" AnchorPane.topAnchor="138.0">
+            <AnchorPane layoutX="437.0" layoutY="138.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="265.0" prefWidth="530.0" AnchorPane.leftAnchor="437.0" AnchorPane.topAnchor="138.0">
                <children>
                   <ImageView fitHeight="72.0" fitWidth="200.0" layoutX="160.0" layoutY="-3.0" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="171.0" AnchorPane.topAnchor="0.0">
                      <image>

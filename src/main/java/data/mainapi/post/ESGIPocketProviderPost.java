@@ -180,4 +180,22 @@ public class ESGIPocketProviderPost extends ESGIPocketProvider {
             }
         });
     }
+
+    public void postCourseStudent(CourseStudentCredentials courseStudentCredentials, final ApiListener<CourseStudent> listener){
+        getEsgiPocketService().postCourseStudent(courseStudentCredentials).enqueue(new Callback<ECourseStudent>() {
+            @Override
+            public void onResponse(Call<ECourseStudent> call, Response<ECourseStudent> response) {
+                if(listener != null){
+                    CourseStudentMapper courseStudentMapper = new CourseStudentMapper();
+                    CourseStudent courseStudent = courseStudentMapper.map(response.body());
+                    listener.onSuccess(courseStudent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ECourseStudent> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
 }

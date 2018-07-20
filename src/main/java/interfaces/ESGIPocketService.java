@@ -55,6 +55,10 @@ public interface ESGIPocketService {
     @GET("topics/{id}/courses")
     Call<ArrayList<ECourse>> getCoursesById(@Path("id") String id);
 
+    @Headers("Content-Type: application/json")
+    @GET("coursesStudent/{id}/courses")
+    Call<ECourseStudent> getCourseStudentByCourseId(@Path("id") String id);
+
     // POST Methods
 
     @Headers("Content-Type: application/json")
@@ -96,6 +100,10 @@ public interface ESGIPocketService {
     @Headers("Content-Type: application/json")
     @POST("answers")
     Call<EAnswer> postAnswer(@Body AnswerCredentials answerCredentials);
+
+    @Headers("Content-Type: application/json")
+    @POST("coursesStudent")
+    Call<ECourseStudent> postCourseStudent(@Body CourseStudentCredentials courseStudentCredentials);
 
     // PUT Methods
 
@@ -180,6 +188,5 @@ public interface ESGIPocketService {
     @Headers("Content-Type: application/json")
     @DELETE("answers/{id}")
     Call<Void> deleteAnswer(@Path("id") String id);
-
 
 }
