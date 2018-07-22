@@ -45,7 +45,9 @@ public class CourseListViewController extends ListViewController<Course> {
 
     @Override
     public void setAddCell() {
-        
+        CourseAddCell courseAddCell = new CourseAddCell(id);
+        courseAddCell.setAddCell();
+        getBorderPane().setBottom(courseAddCell.getAnchorPane());
     }
 
     public void setListCellEvent(){

@@ -21,11 +21,11 @@ public class TopicListViewController extends ListViewController<Topic> {
             String topicId = getListView().getSelectionModel().getSelectedItem().getId();
             CourseListViewController courseListViewController = new CourseListViewController(topicId, getBorderPane());
             courseListViewController.setListView();
+            courseListViewController.setAddCell();
         });
     }
 
     @Override
     public void setAddCell() {
-
     }
 }
