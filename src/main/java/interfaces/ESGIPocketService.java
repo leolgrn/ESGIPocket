@@ -59,6 +59,10 @@ public interface ESGIPocketService {
     @GET("coursesStudent/{id}/courses")
     Call<ECourseStudent> getCourseStudentByCourseId(@Path("id") String id);
 
+    @Headers("Content-Type: application/json")
+    @GET("coursesStudent/likedByUser")
+    Call<ArrayList<ECourseStudent>> getCourseLikedByUser();
+
     // POST Methods
 
     @Headers("Content-Type: application/json")
@@ -95,7 +99,7 @@ public interface ESGIPocketService {
 
     @Headers("Content-Type: application/json")
     @POST("questions")
-    Call<EQuestion> postQuestion(@Body QuestionCredentials questionCredentials);
+    Call<EQuestion> postQuestion(@Body String question);
 
     @Headers("Content-Type: application/json")
     @POST("answers")
@@ -141,7 +145,7 @@ public interface ESGIPocketService {
 
     @Headers("Content-Type: application/json")
     @PUT("questions/{id}")
-    Call<EQuestion> updateQuestion(@Body QuestionCredentials questionCredentials, @Path("id") String id);
+    Call<EQuestion> updateQuestion(@Body String question, @Path("id") String id);
 
     @Headers("Content-Type: application/json")
     @PUT("answers/{id}")

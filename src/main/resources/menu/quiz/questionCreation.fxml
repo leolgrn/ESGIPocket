@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="419.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="question" layoutX="148.0" layoutY="33.0" prefHeight="27.0" prefWidth="251.0" promptText="Question" />
+      <TextField fx:id="response1" layoutX="146.0" layoutY="84.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 1" />
+      <TextField fx:id="response3" layoutX="146.0" layoutY="180.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 3" />
+      <TextField fx:id="response5" layoutX="146.0" layoutY="275.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 5" />
+      <Button fx:id="addQuestion" layoutX="171.0" layoutY="337.0" mnemonicParsing="false" text="Ajouter une question" />
+      <Button fx:id="createQuiz" layoutX="333.0" layoutY="337.0" mnemonicParsing="false" text="Créer le quiz" />
+      <RadioButton fx:id="rightAnswer1" layoutX="115.0" layoutY="89.0" mnemonicParsing="false" />
+      <RadioButton fx:id="rightAnswer3" layoutX="115.0" layoutY="185.0" mnemonicParsing="false" />
+      <RadioButton fx:id="rightAnswer5" layoutX="115.0" layoutY="280.0" mnemonicParsing="false" />
+      <ChoiceBox fx:id="numberOfAnswer" layoutX="412.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" />
+      <TextField fx:id="response2" layoutX="146.0" layoutY="132.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 2" />
+      <RadioButton fx:id="rightAnswer2" layoutX="115.0" layoutY="137.0" mnemonicParsing="false" />
+      <TextField fx:id="response4" layoutX="146.0" layoutY="227.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 4" />
+      <RadioButton fx:id="rightAnswer4" layoutX="115.0" layoutY="232.0" mnemonicParsing="false" />
+   </children>
+</AnchorPane>

@@ -1,7 +1,9 @@
 package controller.menu;
 
 import controller.menu.admin.AdminViewController;
-import controller.menu.topic.TopicListViewController;
+import controller.menu.home.HomeController;
+import controller.menu.quizzes.QuizCreationController;
+import controller.menu.course.topic.TopicListViewController;
 import data.model.Authentification;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -44,9 +46,10 @@ public class Menu {
             borderPane = fxmlLoader.load();
             borderPane.getStylesheets().add(getClass().getResource("/menu/css/menu.css").toExternalForm());
             scene = new Scene(borderPane, MainSettings.WIDTH, MainSettings.HEIGHT);
-            if(Authentification.getInstance().getUser().getRole() != MainSettings.ADMIN){
+            if(Authentification.getInstance().getUser().getRole() != MainSettings.ADMIN) {
                 admin.setVisible(false);
             }
+            new HomeController(insideBorderPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,9 +76,8 @@ public class Menu {
     }
 
     public void onHomeClick(MouseEvent mouseEvent) {
-        borderPane.setBottom(null);
+        new HomeController(insideBorderPane);
         insideBorderPane.setLeft(null);
-        insideBorderPane.setCenter(null);
     }
 
     public void onLessonsClick(MouseEvent mouseEvent) {
@@ -86,9 +88,9 @@ public class Menu {
     }
 
     public void onQuizzesClick(MouseEvent mouseEvent) {
+        QuizCreationController quizCreationController = new QuizCreationController(insideBorderPane);
         borderPane.setBottom(null);
         insideBorderPane.setLeft(null);
-        insideBorderPane.setCenter(null);
     }
 
     public void onAdminClick(MouseEvent mouseEvent) {

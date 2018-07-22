@@ -26,7 +26,7 @@
       </Text>
       <Text fx:id="like" layoutX="254.8134765625" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #7ed321;" text="0" AnchorPane.rightAnchor="101.498046875" />
       <Text fx:id="dislike" layoutX="284.40234375" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #d0021b;" text="0" AnchorPane.rightAnchor="71.9091796875" />
-      <Button fx:id="dowload" layoutX="227.0" layoutY="72.0" mnemonicParsing="false" style="-fx-background-color: #007ca9#007ca9; -fx-text-fill: #ffffff;" text="Télécharger" AnchorPane.rightAnchor="45.5" />
+      <Button fx:id="dowload" layoutX="227.0" layoutY="72.0" mnemonicParsing="false" style="-fx-background-color: #007ca9#007ca9; -fx-text-fill: #ffffff;" text="Consulter" AnchorPane.rightAnchor="45.5" />
       <Button fx:id="green" layoutX="194.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="118.5">
          <graphic>
             <ImageView fx:id="green_thumb" fitHeight="34.0" fitWidth="34.0">

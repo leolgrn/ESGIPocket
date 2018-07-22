@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -36,7 +37,7 @@ public class QuizListCell {
     private AnchorPane anchorPane;
 
     @FXML
-    private Text name;
+    private TextField name;
 
     @FXML
     private ChoiceBox<Topic> topic;
@@ -80,7 +81,7 @@ public class QuizListCell {
         return anchorPane;
     }
 
-    public Text getName() {
+    public TextField getName() {
         return name;
     }
 
@@ -97,6 +98,7 @@ public class QuizListCell {
     }
 
     public void setInfo(Quiz quiz){
+        name.setText(quiz.getName());
         setTopic(quiz);
         delete.setOnMouseClicked(event -> {
             getEsgiPocketProviderDelete().deleteQuiz(quiz.getId(), new ApiListener<String>() {

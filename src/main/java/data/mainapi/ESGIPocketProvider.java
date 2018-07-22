@@ -302,4 +302,28 @@ public class ESGIPocketProvider {
             }
         });
     }
+
+    public void getCourseLikedByUser(final ApiListener<ArrayList<Course>> listener){
+        esgiPocketService.getCourseLikedByUser().enqueue(new Callback<ArrayList<ECourseStudent>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ECourseStudent>> call, Response<ArrayList<ECourseStudent>> response) {
+                if(listener != null){
+                    System.out.println(response.toString());
+                    ArrayList<Course> courseArrayList = new ArrayList<>();
+                    CourseStudentListMapper courseStudentListMapper = new CourseStudentListMapper();
+                    ArrayList<CourseStudent> courseStudentArrayList = courseStudentListMapper.map(response.body());
+                    for (CourseStudent courseStudent: courseStudentArrayList){
+                        Course course = courseStudent.getCourse();
+                        courseArrayList.add(course);
+                    }
+                    listener.onSuccess(courseArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ECourseStudent>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
 }
