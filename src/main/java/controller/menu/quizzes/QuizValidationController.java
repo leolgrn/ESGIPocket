@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -19,7 +20,7 @@ public class QuizValidationController {
     private AnchorPane anchorPane;
 
     @FXML
-    private Text succesMessage;
+    private Label succesMessage;
 
     @FXML
     private Button newQuiz;
@@ -44,7 +45,7 @@ public class QuizValidationController {
 
     public void setInfo(Quiz quiz){
         String user = quiz.getUser().getFirstname();
-        succesMessage.setText("Le quiz a bien été créé.\nMerci pour ta contibution " + user + " !");
+        succesMessage.setText("Le quiz a bien été créé. Merci pour ta contibution " + user + " !");
         newQuiz.setOnMouseClicked(event -> {
             new QuizCreationController(borderPane);
         });

@@ -77,7 +77,9 @@ public class Menu {
 
     public void onHomeClick(MouseEvent mouseEvent) {
         new HomeController(insideBorderPane);
+        borderPane.setBottom(null);
         insideBorderPane.setLeft(null);
+        insideBorderPane.setBottom(null);
     }
 
     public void onLessonsClick(MouseEvent mouseEvent) {
@@ -91,6 +93,7 @@ public class Menu {
         QuizCreationController quizCreationController = new QuizCreationController(insideBorderPane);
         borderPane.setBottom(null);
         insideBorderPane.setLeft(null);
+        insideBorderPane.setBottom(null);
     }
 
     public void onAdminClick(MouseEvent mouseEvent) {

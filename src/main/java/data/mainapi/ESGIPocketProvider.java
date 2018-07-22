@@ -326,4 +326,36 @@ public class ESGIPocketProvider {
             }
         });
     }
+
+    public void getCourseUserContribution(String id, final ApiListener<Integer> listener){
+        esgiPocketService.getCourseUserContribution(id).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(listener != null){
+                    listener.onSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getQuizUserContribution(String id, final ApiListener<Integer> listener){
+        esgiPocketService.getQuizUserContribution(id).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(listener != null){
+                    listener.onSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
 }

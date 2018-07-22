@@ -16,7 +16,9 @@ public class CourseMapper implements Mapping<Course, ECourse> {
         course.setArchive(item.getArchive());
         course.setTitle(item.getTitle());
         course.setTopic(topicMapper.map(item.getTopic()));
-        course.setClass(classMapper.map(item.getClasse()));
+        if(item.getClasse() != null){
+            course.setClass(classMapper.map(item.getClasse()));
+        }
         course.setCreatedAt(item.getCreatedAt());
         course.setUpdatedAt(item.getUpdatedAt());
         course.setContent(item.getContent());

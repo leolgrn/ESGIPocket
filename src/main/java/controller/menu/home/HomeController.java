@@ -24,6 +24,9 @@ public class HomeController {
 
     private ESGIPocketProvider esgiPocketProvider;
 
+    private int numberOfCourse = 0;
+    private int numberOfQuiz = 0;
+
     private BorderPane borderPane;
 
     @FXML
@@ -77,6 +80,7 @@ public class HomeController {
         hello.setText("Hello " + user.getFirstname() + " !");
         classe.setText(user.getClasse().getSpeciality().getAcronym() + " - " + user.getClasse().getGroup().getName());
         setListView();
+        setProgression(user);
         //setPlanning();
     }
 
@@ -96,6 +100,44 @@ public class HomeController {
             public void onError(Throwable throwable) {
                 throwable.printStackTrace();
             }
+        });
+    }
+
+    public void setProgression(User user){
+
+        esgiPocketProvider.getCourseUserContribution(user.getId(), new ApiListener<Integer>() {
+            @Override
+            public void onSuccess(Integer response) {
+                numberOfCourse = response;
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+        });
+        esgiPocketProvider.getQuizUserContribution(user.getId(), new ApiListener<Integer>() {
+            @Override
+            public void onSuccess(Integer response) {
+                numberOfQuiz = response;
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+        });
+        Platform.runLater(() -> {
+            int total = numberOfCourse + numberOfQuiz;
+            String message = "";
+            if(total >= 10){
+                message = "Merci, vous êtes incroyable !";
+            } else if(total > 5 && total < 10){
+                message = "Félicitations !";
+            } else {
+                message = "Ne vous découragez pas ce n'est que le début !";
+            }
+            progression.setText("Vous avez pour l'instant créer " + numberOfCourse + " cours et " + numberOfQuiz + " quiz. " + message);
         });
     }
 }

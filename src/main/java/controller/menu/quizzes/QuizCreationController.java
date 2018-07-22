@@ -86,6 +86,7 @@ public class QuizCreationController {
     }
 
     public void setValidation(){
+
         validation.setOnMouseClicked(event -> {
             if(isValid()){
                 String name = this.name.getText();
