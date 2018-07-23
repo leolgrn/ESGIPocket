@@ -11,18 +11,24 @@ public class CourseListMapper implements ArrayListMapping<Course, ECourse> {
     @Override
     public ArrayList<Course> map(ArrayList<ECourse> arrayList) {
         ArrayList<Course> CourseList = new ArrayList<>();
+        ClassMapper classMapper = new ClassMapper();
         TopicMapper topicMapper = new TopicMapper();
         for(ECourse eCourse: arrayList){
-            Course Course = new Course();
-            Course.setId(eCourse.getId());
-            Course.setArchive(eCourse.getArchive());
-            Course.setTitle(eCourse.getTitle());
-            Course.setTopic(topicMapper.map(eCourse.getTopic()));
-            Course.setClassId(eCourse.getClassId());
-            Course.setCreatedAt(eCourse.getCreatedAt());
-            Course.setUpdatedAt(eCourse.getUpdatedAt());
-            Course.setContent(eCourse.getContent());
-            CourseList.add(Course);
+            Course course = new Course();
+            UserMapper userMapper = new UserMapper();
+            course.setId(eCourse.getId());
+            course.setArchive(eCourse.getArchive());
+            course.setTitle(eCourse.getTitle());
+            course.setTopic(topicMapper.map(eCourse.getTopic()));
+            course.setClass(classMapper.map(eCourse.getClasse()));
+            course.setCreatedAt(eCourse.getCreatedAt());
+            course.setUpdatedAt(eCourse.getUpdatedAt());
+            course.setContent(eCourse.getContent());
+            course.setUser(userMapper.map(eCourse.getUser()));
+            course.setLike(eCourse.getLike());
+            course.setDislike(eCourse.getDislike());
+            course.setUrl(eCourse.getUrl());
+            CourseList.add(course);
         }
         return CourseList;
     }

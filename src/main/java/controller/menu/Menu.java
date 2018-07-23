@@ -1,72 +1,101 @@
 package controller.menu;
 
 import controller.menu.admin.AdminViewController;
-import controller.menu.lesson.CourseListViewController;
 import controller.menu.topic.TopicListViewController;
-import data.model.Topic;
+import data.model.Authentification;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import settings.MainSettings;
 
 import java.io.IOException;
 
 public class Menu {
 
-    private Stage stage;
     private Scene scene;
 
     @FXML
     private BorderPane borderPane;
+
     @FXML
     private BorderPane insideBorderPane;
 
-    public void start(Stage stage) throws IOException {
-        borderPane = FXMLLoader.load(getClass().getResource("/menu/menu.fxml"));
-        scene =  new Scene(borderPane, 800 ,500);scene.getStylesheets().add(getClass().getResource("/menu/ressources/css/courseCustomCell.css").toExternalForm());
+    @FXML
+    private Button admin;
 
+    @FXML
+    private Button quiz;
+
+    @FXML
+    private Button course;
+
+    @FXML
+    private Button home;
+
+    public void start(Stage stage) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/menu.fxml"));
+        fxmlLoader.setController(this);
+        try{
+            borderPane = fxmlLoader.load();
+            borderPane.getStylesheets().add(getClass().getResource("/menu/css/menu.css").toExternalForm());
+            scene = new Scene(borderPane, MainSettings.WIDTH, MainSettings.HEIGHT);
+            if(Authentification.getInstance().getUser().getRole() != MainSettings.ADMIN){
+                admin.setVisible(false);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Platform.runLater(() -> {
             stage.setScene(scene);
             stage.show();
-            this.stage = stage;
         });
+    }
+
+    public BorderPane getBorderPane() {
+        return borderPane;
+    }
+
+    public void setBorderPane(BorderPane borderPane) {
+        this.borderPane = borderPane;
+    }
+
+    public BorderPane getInsideBorderPane() {
+        return insideBorderPane;
+    }
+
+    public void setInsideBorderPane(BorderPane insideBorderPane) {
+        this.insideBorderPane = insideBorderPane;
     }
 
     public void onHomeClick(MouseEvent mouseEvent) {
+        borderPane.setBottom(null);
+        insideBorderPane.setLeft(null);
+        insideBorderPane.setCenter(null);
     }
 
     public void onLessonsClick(MouseEvent mouseEvent) {
-        borderPane.setCenter(insideBorderPane);
-        //BottomSideBar bottomSideBar = new BottomSideBar(borderPane);
         TopicListViewController topicListViewController = new TopicListViewController(insideBorderPane);
-        ListView<Topic> listView = new ListView<>();
-        listView.getStylesheets().add(getClass().getResource("/menu/ressources/css/listViewItem.css").toExternalForm());
-        listView.setOnMouseClicked(event -> {
-            CourseListViewController courseListViewController = new CourseListViewController(insideBorderPane);
-            courseListViewController.setListView(listView.getSelectionModel().getSelectedItem().getId());
-        });
-        //bottomSideBar.setSideBar();
-        topicListViewController.setTopicList(listView);
+        topicListViewController.setListView();
+        borderPane.setBottom(null);
+        insideBorderPane.setCenter(null);
     }
 
     public void onQuizzesClick(MouseEvent mouseEvent) {
-        borderPane.setCenter(insideBorderPane);
-        TopicListViewController topicListViewController = new TopicListViewController(insideBorderPane);
-        ListView<Topic> listView = new ListView<>();
-        listView.getStylesheets().add(getClass().getResource("/menu/ressources/css/listViewItem.css").toExternalForm());
-        listView.setOnMouseClicked(event -> {
-        });
-        topicListViewController.setTopicList(listView);
+        borderPane.setBottom(null);
+        insideBorderPane.setLeft(null);
+        insideBorderPane.setCenter(null);
     }
 
     public void onAdminClick(MouseEvent mouseEvent) {
         AdminViewController adminViewController = new AdminViewController(insideBorderPane);
-        adminViewController.setListItem();
+        adminViewController.setListView();
         borderPane.setBottom(null);
+        insideBorderPane.setCenter(null);
     }
 
 }

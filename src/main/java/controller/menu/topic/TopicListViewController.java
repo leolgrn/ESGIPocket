@@ -1,55 +1,31 @@
 package controller.menu.topic;
 
-import data.mainapi.ESGIPocketProvider;
+import abstractclass.ListViewController;
+import controller.menu.course.CourseListViewController;
 import data.model.Authentification;
 import data.model.Topic;
-import interfaces.ApiListener;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 
-import java.util.ArrayList;
-
-public class TopicListViewController {
-
-    private BorderPane borderPane;
+public class TopicListViewController extends ListViewController<Topic> {
 
     public TopicListViewController(BorderPane borderPane) {
-        this.borderPane = borderPane;
+        super(borderPane, "left", "/menu/css/listView.css");
     }
 
-    public void setTopicList(ListView<Topic> listView) {
-        ESGIPocketProvider esgiPocketProvider = new ESGIPocketProvider(Authentification.getInstance().getToken());
-        esgiPocketProvider.getTopics(new ApiListener<ArrayList<Topic>>() {
-            @Override
-            public void onSuccess(ArrayList<Topic> response) {
-                System.out.println(response.toString());
-                ObservableList<Topic> items = FXCollections.observableArrayList(response);
-                Platform.runLater(() -> {
-                    listView.setItems(items);
-                    listView.setCellFactory(param -> new ListCell<Topic>() {
-                        @Override
-                        protected void updateItem(Topic item, boolean empty) {
-                            super.updateItem(item, empty);
-
-                            if (empty || item == null || item.getName() == null) {
-                                setText(null);
-                            } else {
-                                setText(item.getName());
-                            }
-                        }
-                    });
-                    borderPane.setLeft(listView);
-                });
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-                throwable.printStackTrace();
-            }
+    @Override
+    public void setListView() {
+        getObservableList().setAll(Authentification.getInstance().getUser().getClasse().getTopic());
+        getListView().setItems(getObservableList());
+        getListView().setCellFactory(listView -> new TopicCell());
+        getListView().setOnMouseClicked(event -> {
+            String topicId = getListView().getSelectionModel().getSelectedItem().getId();
+            CourseListViewController courseListViewController = new CourseListViewController(topicId, getBorderPane());
+            courseListViewController.setListView();
+            courseListViewController.setAddCell();
         });
+    }
+
+    @Override
+    public void setAddCell() {
     }
 }

@@ -1,52 +1,82 @@
 package controller.menu.admin;
 
-import data.model.Course;
-import data.model.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
+import abstractclass.ListViewController;
+import controller.menu.admin.classes.ClassListViewController;
+import controller.menu.admin.course.CourseListViewController;
+import controller.menu.admin.group.GroupListViewController;
+import controller.menu.admin.quiz.QuizListViewController;
+import controller.menu.admin.speciality.SpecialityListViewController;
+import controller.menu.admin.topic.TopicListViewController;
+import controller.menu.admin.user.UserListViewController;
+import controller.menu.admin.year.YearListViewController;
 import javafx.scene.layout.BorderPane;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Observable;
-
-public class AdminViewController {
-
-    private BorderPane borderPane;
-    private ObservableList<String> observableList;
-    private ListView<String> listView;
+public class AdminViewController extends ListViewController<String> {
 
     public AdminViewController(BorderPane borderPane){
-        this.borderPane = borderPane;
+        super(borderPane, "left", "/menu/css/listView.css");
     }
 
-    public void setListItem(){
-        observableList = FXCollections.observableArrayList("Utilisateurs", "Classes", "Matières", "Cours");
-        listView = new ListView<>();
-        listView.getStylesheets().add(getClass().getResource("/menu/ressources/css/listViewItem.css").toExternalForm());
-        listView.setItems(observableList);
-        listView.setOnMouseClicked(event -> {
-            loadListView(listView.getSelectionModel().getSelectedItem());
+    @Override
+    public void setListView() {
+        getObservableList().setAll("Utilisateurs", "Classes", "Matières", "Cours", "Groupes", "Années", "Spécialités", "Quiz");
+        getListView().setItems(getObservableList());
+        getListView().setOnMouseClicked(event -> {
+            loadListView(getListView().getSelectionModel().getSelectedItem());
         });
-        borderPane.setLeft(listView);
+    }
+
+    @Override
+    public void setAddCell() {
+
     }
 
     public void loadListView(String item){
-        System.out.print(item);
         switch (item){
             case "Utilisateurs":
-                ListView<User> listView = new ListView<>();
-                UserListViewController userListViewController = new UserListViewController(listView, borderPane);
+                UserListViewController userListViewController = new UserListViewController(getBorderPane());
                 userListViewController.setListView();
+                getBorderPane().setBottom(null);
+                break;
+            case "Classes":
+                ClassListViewController classListViewController = new ClassListViewController(getBorderPane());
+                classListViewController.setListView();
+                classListViewController.setAddCell();
+                break;
+            case "Matières":
+                TopicListViewController topicListViewController = new TopicListViewController(getBorderPane());
+                topicListViewController.setListView();
+                topicListViewController.setAddCell();
+                break;
+            case "Cours":
+                CourseListViewController courseListViewController = new CourseListViewController(getBorderPane());
+                courseListViewController.setListView();
+                getBorderPane().setBottom(null);
+                break;
+            case "Groupes":
+                GroupListViewController groupListViewController = new GroupListViewController(getBorderPane());
+                groupListViewController.setListView();
+                groupListViewController.setAddCell();
+                break;
+            case "Spécialités":
+                SpecialityListViewController specialityListViewController = new SpecialityListViewController(getBorderPane());
+                specialityListViewController.setListView();
+                specialityListViewController.setAddCell();
+                break;
+            case "Années":
+                YearListViewController yearListViewController = new YearListViewController(getBorderPane());
+                yearListViewController.setListView();
+                yearListViewController.setAddCell();
+                break;
+            case "Quiz":
+                QuizListViewController quizListViewController = new QuizListViewController(getBorderPane());
+                quizListViewController.setListView();
+                quizListViewController.setAddCell();
+                getBorderPane().setBottom(null);
                 break;
             default:
-                System.out.println("Not done yet");
+                System.out.println("No model");
         }
     }
-
 
 }

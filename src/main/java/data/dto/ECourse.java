@@ -5,13 +5,17 @@ import com.google.gson.annotations.SerializedName;
 public class ECourse {
 
     @SerializedName("title") private String title;
-    @SerializedName("archive") private String archive;
+    @SerializedName("archive") private Boolean archive;
     @SerializedName("content") private String content;
+    @SerializedName("url") private String url;
     @SerializedName("_id") private String id;
     @SerializedName("topic") private ETopic topic;
-    @SerializedName("class") private String classId;
+    @SerializedName("class") private EClass classe;
     @SerializedName("updatedAt") private String updatedAt;
     @SerializedName("createdAt") private String createdAt;
+    @SerializedName("user") private EUser user;
+    @SerializedName("like") private int like;
+    @SerializedName("dislike") private int dislike;
 
     public String getTitle() {
         return title;
@@ -21,11 +25,11 @@ public class ECourse {
         this.title = title;
     }
 
-    public String getArchive() {
+    public Boolean getArchive() {
         return archive;
     }
 
-    public void setArchive(String archive) {
+    public void setArchive(Boolean archive) {
         this.archive = archive;
     }
 
@@ -45,12 +49,12 @@ public class ECourse {
         this.topic = topic;
     }
 
-    public String getClassId() {
-        return classId;
+    public EClass getClasse() {
+        return classe;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
+    public void setClass(EClass classId) {
+        this.classe = classe;
     }
 
     public String getUpdatedAt() {
@@ -77,17 +81,53 @@ public class ECourse {
         this.content = content;
     }
 
+    public EUser getUser() {
+        return user;
+    }
+
+    public void setUser(EUser user) {
+        this.user = user;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public int getDislike() {
+        return dislike;
+    }
+
+    public void setDislike(int dislike) {
+        this.dislike = dislike;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "ECourse{" +
                 "title='" + title + '\'' +
-                ", archive='" + archive + '\'' +
+                ", archive=" + archive +
                 ", content='" + content + '\'' +
+                ", url='" + url + '\'' +
                 ", id='" + id + '\'' +
                 ", topic=" + topic +
-                ", classId='" + classId + '\'' +
+                ", classe=" + classe +
                 ", updatedAt='" + updatedAt + '\'' +
                 ", createdAt='" + createdAt + '\'' +
+                ", user=" + user +
+                ", like=" + like +
+                ", dislike=" + dislike +
                 '}';
     }
 }

@@ -9,6 +9,7 @@ public class UserMapper implements Mapping<User, EUser> {
     @Override
     public User map(EUser item) {
         User user = new User();
+        ClassMapper classMapper = new ClassMapper();
 
         user.setFirstname(item.getFirstname());
         user.setLastname(item.getLastname());
@@ -17,7 +18,7 @@ public class UserMapper implements Mapping<User, EUser> {
         user.setActivationCode(item.getActivationCode());
         user.setActivated(item.getActivated());
         user.setRole(item.getRole());
-        user.setClassId(item.getClassId());
+        user.setClasse(classMapper.map(item.getClasse()));
         user.setId(item.getId());
 
         return user;

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="courseCell" fx:id="anchorPane" accessibleRole="BUTTON" minHeight="120.0" style="-fx-background-color: #ffffff; -fx-border-radius: 30px;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text id="topic" fx:id="lessonTopic" fill="#007ca9" layoutX="27.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOPIC" wrappingWidth="337.1960144042969" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="Source Sans Pro Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text id="title" fx:id="lessonTitle" layoutX="27.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="311.3677291870117" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="39.20800018310547">
+         <font>
+            <Font name="Source Sans Pro" size="13.0" />
+         </font>
+      </Text>
+      <Text fx:id="lessonAuthor" fill="#979191" layoutX="27.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="auhtor" wrappingWidth="283.55743408203125" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="58.20800018310547">
+         <font>
+            <Font name="Source Sans Pro Italic" size="13.0" />
+         </font>
+      </Text>
+      <Text fx:id="description" layoutX="27.0" layoutY="90.29199981689453" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="283.55743246851307" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="77.5">
+         <font>
+            <Font name="Source Sans Pro" size="13.0" />
+         </font>
+      </Text>
+      <Text fx:id="like" layoutX="292.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" AnchorPane.rightAnchor="50.0" />
+      <Text fx:id="dislike" layoutX="318.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" AnchorPane.rightAnchor="27.0" />
+   </children>
+</AnchorPane>
