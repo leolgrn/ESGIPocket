@@ -179,10 +179,11 @@ public class CourseListCell {
     public void setDowload(Course course){
         dowload.setOnMouseClicked(event -> {
             if(course.getContent() == null){
+                String extension = course.getUrl().substring(course.getUrl().lastIndexOf("."), course.getUrl().length());
                 try {
                     URL url = new URL(course.getUrl());
-                    readPdf(url);
-                    openPdf();
+                    readPdf(url, extension);
+                    openPdf(extension);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -190,11 +191,11 @@ public class CourseListCell {
         });
     }
 
-    public void readPdf(URL url){
+    public void readPdf(URL url, String extension){
         try{
             URLConnection connection = url.openConnection();
             InputStream inputStream = connection.getInputStream();
-            FileOutputStream fos = new FileOutputStream(new File(MainSettings.FILE));
+            FileOutputStream fos = new FileOutputStream(new File(MainSettings.FILE + extension));
             byte[] buffer = new byte[512];
             while (true) {
                 int length = inputStream.read(buffer);
@@ -211,9 +212,9 @@ public class CourseListCell {
         }
     }
 
-    public void openPdf(){
+    public void openPdf(String extension){
         try{
-            File pdfFile = new File(MainSettings.FILE);
+            File pdfFile = new File(MainSettings.FILE + extension);
             if (pdfFile.exists()){
                 if(Desktop.isDesktopSupported()){
                     Desktop.getDesktop().open(pdfFile);

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class ESGIPocketProvider {
 
-    private static final String BASE_URL = "https://esgipocket-staging.herokuapp.com/";
+    private static final String BASE_URL = "https://esgipocket.herokuapp.com/";
 
     private ESGIPocketService esgiPocketService;
 
@@ -65,11 +65,13 @@ public class ESGIPocketProvider {
                 .enqueue(new Callback<EAuthentification>() {
             public void onResponse(Call<EAuthentification> call, Response<EAuthentification> response) {
                 if(listener != null){
-                    // Authentication Singleton creation
-                    System.out.println(response);
-                    AuthentificationMapper authentificationMapper = new AuthentificationMapper();
-                    Authentification authentification = authentificationMapper.map(response.body());
-                    listener.onSuccess(authentification);
+                    if(response.code() == 200){
+                        AuthentificationMapper authentificationMapper = new AuthentificationMapper();
+                        Authentification authentification = authentificationMapper.map(response.body());
+                        listener.onSuccess(authentification);
+                    } else if(response.code() == 401){
+                        listener.onSuccess(null);
+                    }
                 }
             }
 
@@ -308,7 +310,6 @@ public class ESGIPocketProvider {
             @Override
             public void onResponse(Call<ArrayList<ECourseStudent>> call, Response<ArrayList<ECourseStudent>> response) {
                 if(listener != null){
-                    System.out.println(response.toString());
                     ArrayList<Course> courseArrayList = new ArrayList<>();
                     CourseStudentListMapper courseStudentListMapper = new CourseStudentListMapper();
                     ArrayList<CourseStudent> courseStudentArrayList = courseStudentListMapper.map(response.body());
@@ -354,6 +355,29 @@ public class ESGIPocketProvider {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getNextCourse(final ApiListener<NextCourse> listener){
+        esgiPocketService.getNextCourse().enqueue(new Callback<ENextCourse>() {
+            @Override
+            public void onResponse(Call<ENextCourse> call, Response<ENextCourse> response) {
+                if(listener != null){
+                    System.out.println();
+                    if(response.body() == null){
+                        listener.onSuccess(null);
+                    } else {
+                        NextCourseMapper nextCourseMapper = new NextCourseMapper();
+                        NextCourse nextCourse = nextCourseMapper.map(response.body());
+                        listener.onSuccess(nextCourse);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ENextCourse> call, Throwable throwable) {
                 if (listener != null) listener.onError(throwable);
             }
         });

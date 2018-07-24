@@ -71,6 +71,10 @@ public interface ESGIPocketService {
     @GET("quizzes/{id}/userContribution")
     Call<Integer> getQuizUserContribution(@Path("id") String id);
 
+    @Headers("Content-Type: application/json")
+    @GET("plannings//mine/next-course")
+    Call<ENextCourse> getNextCourse();
+
     // POST Methods
 
     @Headers("Content-Type: application/json")

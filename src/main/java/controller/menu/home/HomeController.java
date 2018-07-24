@@ -1,9 +1,11 @@
 package controller.menu.home;
 
+import controller.core.Core;
 import controller.menu.course.CourseCell;
 import data.mainapi.ESGIPocketProvider;
 import data.model.Authentification;
 import data.model.Course;
+import data.model.NextCourse;
 import data.model.User;
 import interfaces.ApiListener;
 import javafx.application.Platform;
@@ -11,11 +13,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,29 +37,34 @@ public class HomeController {
     private AnchorPane anchorPane;
 
     @FXML
+    private AnchorPane planningAnchorPane;
+
+    @FXML
     private Text hello;
 
     @FXML
     private Text classe;
 
-
     @FXML
     private Text course;
-
-    @FXML
-    private Text day;
 
     @FXML
     private Text time;
 
     @FXML
-    private Text room;
+    private Text teachers;
+
+    @FXML
+    private Button importPlanning;
 
     @FXML
     private Text progression;
 
     @FXML
     private ListView<Course> courseListView;
+
+    @FXML
+    private Button deconnexion;
 
     public HomeController(BorderPane borderPane) {
         this.borderPane = borderPane;
@@ -76,12 +85,15 @@ public class HomeController {
     }
 
     public void setInfo(){
+        planningAnchorPane.setVisible(false);
+        importPlanning.setVisible(false);
         User user = Authentification.getInstance().getUser();
         hello.setText("Hello " + user.getFirstname() + " !");
         classe.setText(user.getClasse().getSpeciality().getAcronym() + " - " + user.getClasse().getGroup().getName());
         setListView();
         setProgression(user);
-        //setPlanning();
+        setPlanning();
+        setDeconnexion();
     }
 
     public void setListView(){
@@ -104,7 +116,6 @@ public class HomeController {
     }
 
     public void setProgression(User user){
-
         esgiPocketProvider.getCourseUserContribution(user.getId(), new ApiListener<Integer>() {
             @Override
             public void onSuccess(Integer response) {
@@ -138,6 +149,42 @@ public class HomeController {
                 message = "Ne vous découragez pas ce n'est que le début !";
             }
             progression.setText("Vous avez pour l'instant créer " + numberOfCourse + " cours et " + numberOfQuiz + " quiz. " + message);
+        });
+    }
+
+    public void setPlanning(){
+        esgiPocketProvider.getNextCourse(new ApiListener<NextCourse>() {
+            @Override
+            public void onSuccess(NextCourse response) {
+                if(response == null){
+                    importPlanning.setVisible(true);
+                } else {
+                    planningAnchorPane.setVisible(true);
+                    course.setText(response.getSubject());
+                    time.setText(response.getBeginning() + " - " + response.getEnd());
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for(String teacher: response.getTeachers()){
+                        stringBuilder.append(" " + teacher);
+                    }
+                    teachers.setText(stringBuilder.toString());
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+        });
+    }
+
+    public void setDeconnexion(){
+        deconnexion.setOnMouseClicked(event -> {
+            Core core = new Core();
+            try {
+                core.start((Stage) borderPane.getScene().getWindow());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 }
