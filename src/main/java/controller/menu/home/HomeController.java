@@ -120,6 +120,7 @@ public class HomeController {
             @Override
             public void onSuccess(Integer response) {
                 numberOfCourse = response;
+                getQuizz(user);
             }
 
             @Override
@@ -127,10 +128,14 @@ public class HomeController {
 
             }
         });
+    }
+
+    public void getQuizz(User user){
         esgiPocketProvider.getQuizUserContribution(user.getId(), new ApiListener<Integer>() {
             @Override
             public void onSuccess(Integer response) {
                 numberOfQuiz = response;
+                displayInfos();
             }
 
             @Override
@@ -138,18 +143,19 @@ public class HomeController {
 
             }
         });
-        Platform.runLater(() -> {
-            int total = numberOfCourse + numberOfQuiz;
-            String message = "";
-            if(total >= 10){
-                message = "Merci, vous êtes incroyable !";
-            } else if(total > 5 && total < 10){
-                message = "Félicitations !";
-            } else {
-                message = "Ne vous découragez pas ce n'est que le début !";
-            }
-            progression.setText("Vous avez pour l'instant créer " + numberOfCourse + " cours et " + numberOfQuiz + " quiz. " + message);
-        });
+    }
+
+    public void displayInfos(){
+        int total = numberOfCourse + numberOfQuiz;
+        String message = "";
+        if(total >= 10){
+            message = "Merci, vous êtes incroyable !";
+        } else if(total > 5 && total < 10){
+            message = "Félicitations !";
+        } else {
+            message = "Ne vous découragez pas ce n'est que le début !";
+        }
+        progression.setText("Vous avez pour l'instant créer " + numberOfCourse + " cours et " + numberOfQuiz + " quiz. " + message);
     }
 
     public void setPlanning(){
