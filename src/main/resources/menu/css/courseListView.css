@@ -30,7 +30,19 @@
 }
 
 #courseCell:hover{
-    -fx-cursor: hand;
     -fx-border-radius: 10 10 10 10;
     -fx-background-radius: 10 10 10 10;
+}
+
+.button:hover{
+    -fx-cursor: hand;
+}
+
+
+.list-view .scroll-bar:vertical {
+    -fx-scale-x: 0;
+}
+
+#nextCourse{
+    -fx-border-radius: 10 10 10 10;
 }

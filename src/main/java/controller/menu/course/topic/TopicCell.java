@@ -1,4 +1,4 @@
-package controller.menu.topic;
+package controller.menu.course.topic;
 
 import data.model.Topic;
 import javafx.scene.control.ListCell;

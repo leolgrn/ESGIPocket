@@ -3,10 +3,26 @@ package data.model.credentials;
 public class AnswerCredentials {
 
     private String content;
-    private String question;
+    private Boolean rightAnswer;
 
-    public AnswerCredentials(String content, String question) {
+    public AnswerCredentials(String content, Boolean rightAnswer) {
         this.content = content;
-        this.question = question;
+        this.rightAnswer = rightAnswer;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public Boolean getRightAnswer() {
+        return rightAnswer;
+    }
+
+    @Override
+    public String toString() {
+        return "AnswerCredentials{" +
+                "content='" + content + '\'' +
+                ", rightAnswer=" + rightAnswer +
+                '}';
     }
 }

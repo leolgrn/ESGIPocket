@@ -20,7 +20,9 @@ public class CourseListMapper implements ArrayListMapping<Course, ECourse> {
             course.setArchive(eCourse.getArchive());
             course.setTitle(eCourse.getTitle());
             course.setTopic(topicMapper.map(eCourse.getTopic()));
-            course.setClass(classMapper.map(eCourse.getClasse()));
+            if(eCourse.getClasse() != null){
+                course.setClass(classMapper.map(eCourse.getClasse()));
+            }
             course.setCreatedAt(eCourse.getCreatedAt());
             course.setUpdatedAt(eCourse.getUpdatedAt());
             course.setContent(eCourse.getContent());

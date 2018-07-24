@@ -55,6 +55,26 @@ public interface ESGIPocketService {
     @GET("topics/{id}/courses")
     Call<ArrayList<ECourse>> getCoursesById(@Path("id") String id);
 
+    @Headers("Content-Type: application/json")
+    @GET("coursesStudent/{id}/courses")
+    Call<ECourseStudent> getCourseStudentByCourseId(@Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @GET("coursesStudent/likedByUser")
+    Call<ArrayList<ECourseStudent>> getCourseLikedByUser();
+
+    @Headers("Content-Type: application/json")
+    @GET("courses/{id}/userContribution")
+    Call<Integer> getCourseUserContribution(@Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @GET("quizzes/{id}/userContribution")
+    Call<Integer> getQuizUserContribution(@Path("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @GET("plannings//mine/next-course")
+    Call<ENextCourse> getNextCourse();
+
     // POST Methods
 
     @Headers("Content-Type: application/json")
@@ -91,11 +111,15 @@ public interface ESGIPocketService {
 
     @Headers("Content-Type: application/json")
     @POST("questions")
-    Call<EQuestion> postQuestion(@Body QuestionCredentials questionCredentials);
+    Call<EQuestion> postQuestion(@Body String question);
 
     @Headers("Content-Type: application/json")
     @POST("answers")
     Call<EAnswer> postAnswer(@Body AnswerCredentials answerCredentials);
+
+    @Headers("Content-Type: application/json")
+    @POST("coursesStudent")
+    Call<ECourseStudent> postCourseStudent(@Body CourseStudentCredentials courseStudentCredentials);
 
     // PUT Methods
 
@@ -133,7 +157,7 @@ public interface ESGIPocketService {
 
     @Headers("Content-Type: application/json")
     @PUT("questions/{id}")
-    Call<EQuestion> updateQuestion(@Body QuestionCredentials questionCredentials, @Path("id") String id);
+    Call<EQuestion> updateQuestion(@Body String question, @Path("id") String id);
 
     @Headers("Content-Type: application/json")
     @PUT("answers/{id}")
@@ -180,6 +204,5 @@ public interface ESGIPocketService {
     @Headers("Content-Type: application/json")
     @DELETE("answers/{id}")
     Call<Void> deleteAnswer(@Path("id") String id);
-
 
 }

@@ -5,6 +5,7 @@ public class Quiz {
     private String id;
     private String name;
     private Topic topic;
+    private User user;
 
     public String getName() {
         return name;
@@ -30,12 +31,21 @@ public class Quiz {
         this.id = id;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Quiz{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", topic=" + topic +
+                ", user=" + user +
                 '}';
     }
 }

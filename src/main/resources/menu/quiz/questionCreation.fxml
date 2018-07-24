@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="503.0" prefWidth="919.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="question" layoutX="148.0" layoutY="33.0" prefHeight="27.0" prefWidth="251.0" promptText="Question" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="188.0" AnchorPane.topAnchor="126.0" />
+      <TextField fx:id="response1" layoutX="146.0" layoutY="180.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 1" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="180.0" />
+      <TextField fx:id="response3" layoutX="147.0" layoutY="272.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 3" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="272.0" />
+      <TextField fx:id="response5" layoutX="147.0" layoutY="362.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 5" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="362.0" />
+      <RadioButton fx:id="rightAnswer4" layoutX="116.0" layoutY="320.0" mnemonicParsing="false" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="320.0" />
+      <RadioButton fx:id="rightAnswer3" layoutX="117.0" layoutY="275.0" mnemonicParsing="false" AnchorPane.leftAnchor="117.0" />
+      <RadioButton fx:id="rightAnswer5" layoutX="116.0" layoutY="364.0" mnemonicParsing="false" AnchorPane.leftAnchor="116.0" />
+      <ChoiceBox fx:id="numberOfAnswer" layoutX="412.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="126.0" />
+      <TextField fx:id="response2" layoutX="146.0" layoutY="226.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 2" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="226.0" />
+      <RadioButton fx:id="rightAnswer2" layoutX="116.0" layoutY="230.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="15.0" AnchorPane.leftAnchor="116.0" />
+      <TextField fx:id="response4" layoutX="147.0" layoutY="316.0" prefHeight="27.0" prefWidth="339.0" promptText="Réponse 4" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="316.0" />
+      <RadioButton fx:id="rightAnswer1" layoutX="116.0" layoutY="184.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="25.0" AnchorPane.leftAnchor="116.0" />
+      <HBox alignment="CENTER" layoutX="1.0" layoutY="397.0" prefHeight="66.0" prefWidth="951.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="addQuestion" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: orange; -fx-text-fill: #ffffff;" text="Ajouter une question" />
+            <Button fx:id="createQuiz" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: green; -fx-text-fill: #ffffff;" text="Créer le quiz">
+               <HBox.margin>
+                  <Insets left="25.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="9.0" layoutY="57.0" prefHeight="47.0" prefWidth="844.0" style="-fx-text-fill: #ffffff;" text="Création d'une question" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

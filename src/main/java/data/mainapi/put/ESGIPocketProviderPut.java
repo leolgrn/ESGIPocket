@@ -161,8 +161,8 @@ public class ESGIPocketProviderPut extends ESGIPocketProvider {
         });
     }
 
-    public void updateQuestion(QuestionCredentials questionCredentials, String id, final ApiListener<Question> listener){
-        getEsgiPocketService().updateQuestion(questionCredentials, id).enqueue(new Callback<EQuestion>() {
+    public void updateQuestion(String question, String id, final ApiListener<Question> listener){
+        getEsgiPocketService().updateQuestion(question, id).enqueue(new Callback<EQuestion>() {
             @Override
             public void onResponse(Call<EQuestion> call, Response<EQuestion> response) {
                 if(listener != null){

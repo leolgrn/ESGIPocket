@@ -9,9 +9,11 @@ public class QuizzMapper implements Mapping<Quiz,EQuiz> {
     public Quiz map(EQuiz item) {
         Quiz quiz = new Quiz();
         TopicMapper topicMapper = new TopicMapper();
+        UserMapper userMapper = new UserMapper();
         quiz.setId(item.getId());
         quiz.setName(item.getName());
         quiz.setTopic(topicMapper.map(item.geteTopic()));
+        quiz.setUser(userMapper.map(item.geteUser()));
         return quiz;
     }
 }

@@ -65,11 +65,13 @@ public class ESGIPocketProvider {
                 .enqueue(new Callback<EAuthentification>() {
             public void onResponse(Call<EAuthentification> call, Response<EAuthentification> response) {
                 if(listener != null){
-                    // Authentication Singleton creation
-                    System.out.println(response);
-                    AuthentificationMapper authentificationMapper = new AuthentificationMapper();
-                    Authentification authentification = authentificationMapper.map(response.body());
-                    listener.onSuccess(authentification);
+                    if(response.code() == 200){
+                        AuthentificationMapper authentificationMapper = new AuthentificationMapper();
+                        Authentification authentification = authentificationMapper.map(response.body());
+                        listener.onSuccess(authentification);
+                    } else if(response.code() == 401){
+                        listener.onSuccess(null);
+                    }
                 }
             }
 
@@ -276,6 +278,106 @@ public class ESGIPocketProvider {
 
             @Override
             public void onFailure(Call<ArrayList<EAnswer>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getCourseStudentByCourseId(String id, final ApiListener<CourseStudent> listener){
+        esgiPocketService.getCourseStudentByCourseId(id).enqueue(new Callback<ECourseStudent>() {
+            @Override
+            public void onResponse(Call<ECourseStudent> call, Response<ECourseStudent> response) {
+                if(listener != null) {
+                    if (response.body() == null){
+                        listener.onSuccess(null);
+                    } else {
+                        CourseStudentMapper courseStudentMapper = new CourseStudentMapper();
+                        CourseStudent courseStudent = courseStudentMapper.map(response.body());
+                        listener.onSuccess(courseStudent);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ECourseStudent> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getCourseLikedByUser(final ApiListener<ArrayList<Course>> listener){
+        esgiPocketService.getCourseLikedByUser().enqueue(new Callback<ArrayList<ECourseStudent>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ECourseStudent>> call, Response<ArrayList<ECourseStudent>> response) {
+                if(listener != null){
+                    ArrayList<Course> courseArrayList = new ArrayList<>();
+                    CourseStudentListMapper courseStudentListMapper = new CourseStudentListMapper();
+                    ArrayList<CourseStudent> courseStudentArrayList = courseStudentListMapper.map(response.body());
+                    for (CourseStudent courseStudent: courseStudentArrayList){
+                        Course course = courseStudent.getCourse();
+                        courseArrayList.add(course);
+                    }
+                    listener.onSuccess(courseArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ECourseStudent>> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getCourseUserContribution(String id, final ApiListener<Integer> listener){
+        esgiPocketService.getCourseUserContribution(id).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(listener != null){
+                    listener.onSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getQuizUserContribution(String id, final ApiListener<Integer> listener){
+        esgiPocketService.getQuizUserContribution(id).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(listener != null){
+                    listener.onSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
+
+    public void getNextCourse(final ApiListener<NextCourse> listener){
+        esgiPocketService.getNextCourse().enqueue(new Callback<ENextCourse>() {
+            @Override
+            public void onResponse(Call<ENextCourse> call, Response<ENextCourse> response) {
+                if(listener != null){
+                    System.out.println();
+                    if(response.body() == null){
+                        listener.onSuccess(null);
+                    } else {
+                        NextCourseMapper nextCourseMapper = new NextCourseMapper();
+                        NextCourse nextCourse = nextCourseMapper.map(response.body());
+                        listener.onSuccess(nextCourse);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ENextCourse> call, Throwable throwable) {
                 if (listener != null) listener.onError(throwable);
             }
         });

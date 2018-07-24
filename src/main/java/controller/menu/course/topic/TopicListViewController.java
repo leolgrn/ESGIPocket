@@ -1,4 +1,4 @@
-package controller.menu.topic;
+package controller.menu.course.topic;
 
 import abstractclass.ListViewController;
 import controller.menu.course.CourseListViewController;
