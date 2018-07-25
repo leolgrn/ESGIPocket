@@ -16,6 +16,7 @@ import data.model.Course;
 import data.model.User;
 import data.model.credentials.CourseCredentials;
 import interfaces.ApiListener;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -150,23 +151,34 @@ public class CourseAddCell  {
         User currentUser = Authentification.getInstance().getUser();
         String fileName = fileNameTextField.getText();
 
-        CourseCredentials courseCredentials = new CourseCredentials(fileName, this.idTopic, false, null, BUCKET_ADDRESS + currentUser.getId() + "/" + fileFullName, currentUser.getClasse().getId(), currentUser.getId());
+        CourseCredentials courseCredentials = new CourseCredentials(fileName, this.idTopic, false, null,BUCKET_ADDRESS + currentUser.getId() + "/" + fileFullName, currentUser.getClasse().getId(), currentUser.getId());
         ESGIPocketProviderPost esgiPocketProviderPost = new ESGIPocketProviderPost(Authentification.getInstance().getToken());
 
         esgiPocketProviderPost.postCourse(courseCredentials, new ApiListener<Course>() {
             @Override
             public void onSuccess(Course response) {
-                progressLabel.setText("Cours uploadé");
-                fileNameTextField.setText("");
-                filePathTextField.setText("");
-                chooseFileButton.setDisable(false);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressLabel.setText("Upload termine");
+                        fileNameTextField.setText("");
+                        filePathTextField.setText("");
+                        chooseFileButton.setDisable(false);
+                    }
+                });
+
             }
 
             @Override
             public void onError(Throwable throwable) {
-                progressLabel.setText("Erreur lors de l'upload du fichier");
-                chooseFileButton.setDisable(false);
-                uploadButton.setDisable(false);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressLabel.setText("Erreur lors de l'upload du fichier");
+                        chooseFileButton.setDisable(false);
+                        uploadButton.setDisable(false);
+                    }
+                });
             }
         });
     }
