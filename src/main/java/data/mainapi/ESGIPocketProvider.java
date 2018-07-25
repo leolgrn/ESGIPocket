@@ -18,8 +18,7 @@ import java.util.ArrayList;
 
 public class ESGIPocketProvider {
 
-    // private static final String BASE_URL = "https://esgipocket-staging.herokuapp.com/";
-    private static final String BASE_URL = "http://127.0.0.1:3000/";
+    private static final String BASE_URL = "https://esgipocket.herokuapp.com/";
 
     private ESGIPocketService esgiPocketService;
 

@@ -36,6 +36,7 @@ public class CourseAddCell  {
 
     private String idTopic;
     private File fileToUpload;
+    private String fileName = "";
     private static final String BUCKET_NAME = "esgipocket";
     private static final String BUCKET_ADDRESS = "https://s3.eu-west-3.amazonaws.com/esgipocket/";
 
@@ -107,18 +108,18 @@ public class CourseAddCell  {
             uploadButton.setDisable(true);
             chooseFileButton.setDisable(true);
 
-            String fileFullName = fileToUpload.getName();
-            if (!fileFullName.contains(".")) {
-                fileFullName = fileFullName + fileToUpload.getName().substring(fileToUpload.getName().lastIndexOf("."), fileToUpload.getName().length());
+            fileName = fileToUpload.getName();
+            if (!fileName.contains(".")) {
+                fileName = fileName + fileToUpload.getName().substring(fileToUpload.getName().lastIndexOf("."), fileToUpload.getName().length());
             }
-            fileFullName = fileFullName.replaceAll("\\s+","_");
-            signFile(fileFullName);
+            fileName = fileName.replaceAll("\\s+","_");
+            signFile();
         });
     }
 
-    public void signFile(String fileFullName) {
+    public void signFile() {
         ESGIPocketProvider esgiPocketProvider = new ESGIPocketProvider(Authentification.getInstance().getToken());
-        esgiPocketProvider.getSignedFile(Authentification.getInstance().getUser().getId() + "/" + fileFullName, "pdf", new ApiListener<SignedFile>() {
+        esgiPocketProvider.getSignedFile(Authentification.getInstance().getUser().getId() + "/" + fileName, "pdf", new ApiListener<SignedFile>() {
             @Override
             public void onSuccess(SignedFile response) {
                 upload(response);
@@ -145,7 +146,7 @@ public class CourseAddCell  {
             progressLabel.setText("Upload en cours");
 
             try {
-                Upload xfer = xfer_mgr.upload(BUCKET_NAME,  signedFile.getSignedRequest(), f);
+                Upload xfer = xfer_mgr.upload(BUCKET_NAME,  Authentification.getInstance().getUser().getId() + "/" + fileName, f);
                 xfer.addProgressListener((ProgressListener) progressEvent -> {
                     ProgressEventType progressEventType = progressEvent.getEventType();
                     if (progressEventType == ProgressEventType.TRANSFER_COMPLETED_EVENT) {
@@ -171,12 +172,12 @@ public class CourseAddCell  {
         }
     }
 
-    public void addCourseToDatabase(String fileFullName) {
+    public void addCourseToDatabase(String fileUrl) {
 
         User currentUser = Authentification.getInstance().getUser();
-        String fileName = fileNameTextField.getText();
+        String courseName = fileNameTextField.getText();
 
-        CourseCredentials courseCredentials = new CourseCredentials(fileName, this.idTopic, false, null,BUCKET_ADDRESS + currentUser.getId() + "/" + fileFullName, currentUser.getClasse().getId(), currentUser.getId());
+        CourseCredentials courseCredentials = new CourseCredentials(courseName, this.idTopic, false, null, fileUrl, currentUser.getClasse().getId(), currentUser.getId());
         ESGIPocketProviderPost esgiPocketProviderPost = new ESGIPocketProviderPost(Authentification.getInstance().getToken());
 
         esgiPocketProviderPost.postCourse(courseCredentials, new ApiListener<Course>() {
