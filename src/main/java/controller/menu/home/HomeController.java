@@ -13,15 +13,30 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
-import java.io.IOException;
+import java.awt.event.MouseEvent;
+import java.io.*;
 import java.util.ArrayList;
 
 public class HomeController {
@@ -61,6 +76,12 @@ public class HomeController {
     private Button importUpdatePlanning;
 
     @FXML
+    private Text importThanksPlanning;
+
+    @FXML
+    private HBox importThanksPlanningWrapper;
+
+    @FXML
     private Text progression;
 
     @FXML
@@ -68,6 +89,10 @@ public class HomeController {
 
     @FXML
     private Button deconnexion;
+
+    private File fileToUpload;
+
+    private static final String BASE_URL = "https://esgipocket.herokuapp.com/";
 
     public HomeController(BorderPane borderPane) {
         this.borderPane = borderPane;
@@ -101,12 +126,55 @@ public class HomeController {
     }
 
     private void setImportPlanning() {
-        importUpdatePlanning.setOnMouseClicked(event -> {
-            // TODO : Import planning
-        });
-        importPlanning.setOnMouseClicked(event -> {
-            // TODO : Import planning
-        });
+        importThanksPlanning.setVisible(false);
+        importThanksPlanningWrapper.setVisible(false);
+
+        importUpdatePlanning.setOnMouseClicked(this::manageFileUpload);
+        importPlanning.setOnMouseClicked(this::manageFileUpload);
+    }
+
+    private void manageFileUpload(javafx.scene.input.MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        Node node = (Node) event.getSource();
+
+        fileToUpload = fileChooser.showOpenDialog(node.getScene().getWindow());
+
+        if (fileToUpload == null) {
+            return;
+        }
+
+        // UPLOAD
+        importUpdatePlanning.setVisible(false);
+        importPlanning.setVisible(false);
+        importThanksPlanning.setVisible(true);
+        importThanksPlanningWrapper.setVisible(true);
+
+        uploadPlanning();
+    }
+
+    private void uploadPlanning() {
+        String url = BASE_URL + "/plannings";
+        CloseableHttpClient client = HttpClients.createDefault();
+
+        File file = new File(fileToUpload.getPath());
+        HttpPost post = new HttpPost(url);
+        post.addHeader("Authorization", Authentification.getInstance().getToken());
+        FileBody fileBody = new FileBody(file, ContentType.DEFAULT_BINARY);
+
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        builder.addPart("planning", fileBody);
+        HttpEntity entity = builder.build();
+
+        post.setEntity(entity);
+
+        try {
+            HttpResponse response = client.execute(post);
+            System.out.println(response.getStatusLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setListView(){
