@@ -58,6 +58,9 @@ public class HomeController {
     private Button importPlanning;
 
     @FXML
+    private Button importUpdatePlanning;
+
+    @FXML
     private Text progression;
 
     @FXML
@@ -93,7 +96,17 @@ public class HomeController {
         setListView();
         setProgression(user);
         setPlanning();
+        setImportPlanning();
         setDeconnexion();
+    }
+
+    private void setImportPlanning() {
+        importUpdatePlanning.setOnMouseClicked(event -> {
+            // TODO : Import planning
+        });
+        importPlanning.setOnMouseClicked(event -> {
+            // TODO : Import planning
+        });
     }
 
     public void setListView(){

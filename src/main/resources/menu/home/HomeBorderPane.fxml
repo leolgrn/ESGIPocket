@@ -26,6 +26,7 @@
             <Text fx:id="course" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ffffff#ffffff;" text="Cours" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0" />
             <Text fx:id="time" layoutX="484.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ffffff#ffffff;" text="Horaires" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
             <Text fx:id="teachers" layoutX="487.5048828125" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #000000;" text="Teachers" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.66015625" AnchorPane.topAnchor="40.0" />
+            <Button fx:id="importUpdatePlanning" alignment="CENTER" layoutX="18.0" layoutY="51.0" mnemonicParsing="false" style="-fx-background-color: #303030; -fx-text-fill: #ffffff;" text="Mettre à jour le planning" />
          </children>
       </AnchorPane>
       <Text fill="#ffffffa6" layoutX="34.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROGRESSION" AnchorPane.leftAnchor="20.0">
