@@ -13,6 +13,7 @@ public class CourseListMapper implements ArrayListMapping<Course, ECourse> {
         ArrayList<Course> CourseList = new ArrayList<>();
         ClassMapper classMapper = new ClassMapper();
         TopicMapper topicMapper = new TopicMapper();
+        CalendarMapper calendarMapper = new CalendarMapper();
         for(ECourse eCourse: arrayList){
             Course course = new Course();
             UserMapper userMapper = new UserMapper();
@@ -23,8 +24,8 @@ public class CourseListMapper implements ArrayListMapping<Course, ECourse> {
             if(eCourse.getClasse() != null){
                 course.setClass(classMapper.map(eCourse.getClasse()));
             }
-            course.setCreatedAt(eCourse.getCreatedAt());
-            course.setUpdatedAt(eCourse.getUpdatedAt());
+            course.setCreatedAt(calendarMapper.map(eCourse.getCreatedAt()));
+            course.setUpdatedAt(calendarMapper.map(eCourse.getUpdatedAt()));
             course.setContent(eCourse.getContent());
             course.setUser(userMapper.map(eCourse.getUser()));
             course.setLike(eCourse.getLike());

@@ -102,5 +102,4 @@ public class Menu {
         borderPane.setBottom(null);
         insideBorderPane.setCenter(null);
     }
-
 }

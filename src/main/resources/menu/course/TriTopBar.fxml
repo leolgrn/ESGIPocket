@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="anchorPane" minWidth="300.0" prefHeight="50.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ChoiceBox fx:id="choiceBox" layoutX="130.0" layoutY="11.0" prefWidth="150.0" style="-fx-background-color: #303030; fx-text-fill: #ffffff;" AnchorPane.rightAnchor="20.0" />
+      <Text layoutX="47.341796875" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ffffff;" text="Trier par" AnchorPane.rightAnchor="200.17578125" />
+   </children>
+</AnchorPane>

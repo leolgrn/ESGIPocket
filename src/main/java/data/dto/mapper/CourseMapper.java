@@ -1,6 +1,7 @@
 package data.dto.mapper;
 
 import data.dto.ECourse;
+import data.model.Calendar;
 import data.model.Course;
 import interfaces.Mapping;
 
@@ -12,6 +13,7 @@ public class CourseMapper implements Mapping<Course, ECourse> {
         UserMapper userMapper = new UserMapper();
         TopicMapper topicMapper = new TopicMapper();
         ClassMapper classMapper = new ClassMapper();
+        CalendarMapper calendarMapper = new CalendarMapper();
         course.setId(item.getId());
         course.setArchive(item.getArchive());
         course.setTitle(item.getTitle());
@@ -19,8 +21,8 @@ public class CourseMapper implements Mapping<Course, ECourse> {
         if(item.getClasse() != null){
             course.setClass(classMapper.map(item.getClasse()));
         }
-        course.setCreatedAt(item.getCreatedAt());
-        course.setUpdatedAt(item.getUpdatedAt());
+        course.setCreatedAt(calendarMapper.map(item.getCreatedAt()));
+        course.setUpdatedAt(calendarMapper.map(item.getUpdatedAt()));
         course.setContent(item.getContent());
         course.setUser(userMapper.map(item.getUser()));
         course.setLike(item.getLike());

@@ -9,8 +9,8 @@ public class Course {
     private String id;
     private Topic topic;
     private Class classe;
-    private String updatedAt;
-    private String createdAt;
+    private Calendar updatedAt;
+    private Calendar createdAt;
     private User user;
     private int like;
     private int dislike;
@@ -59,19 +59,19 @@ public class Course {
         this.classe = classe;
     }
 
-    public String getUpdatedAt() {
+    public Calendar getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(Calendar updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public String getCreatedAt() {
+    public Calendar getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Calendar createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -125,8 +125,8 @@ public class Course {
                 ", id='" + id + '\'' +
                 ", topic=" + topic +
                 ", classe=" + classe +
-                ", updatedAt='" + updatedAt + '\'' +
-                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt=" + updatedAt +
+                ", createdAt=" + createdAt +
                 ", user=" + user +
                 ", like=" + like +
                 ", dislike=" + dislike +

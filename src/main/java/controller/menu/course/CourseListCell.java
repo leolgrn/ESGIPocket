@@ -59,6 +59,8 @@ public class CourseListCell {
     public Text description;
     @FXML
     public Button dowload;
+    @FXML
+    public Text date;
 
     public CourseListCell() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menu/course/courseCustomCell.fxml"));
@@ -88,10 +90,17 @@ public class CourseListCell {
         lessonAuthor.setText(course.getUser().getFirstname() + " " + course.getUser().getLastname());
         like.setText(Integer.toString(course.getLike()));
         dislike.setText(Integer.toString(course.getDislike()));
+        date.setText("Créé le : " + getCreationDate(course));
         setVote(course);
         setGreenVote(course);
         setRedVote(course);
         setDowload(course);
+    }
+
+    public String getCreationDate(Course course){
+        String day = course.getCreatedAt().getDay() < 10 ? "0" + Integer.toString(course.getCreatedAt().getDay()) : Integer.toString(course.getCreatedAt().getDay());
+        String month = course.getCreatedAt().getMonth() < 10 ? "0" + Integer.toString(course.getCreatedAt().getMonth()) : Integer.toString(course.getCreatedAt().getMonth());
+        return day + "/" + month + "/" + Integer.toString(course.getCreatedAt().getYear());
     }
 
     public void setVote(Course course){
