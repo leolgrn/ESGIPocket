@@ -118,6 +118,8 @@ public class CourseAddCell  {
     }
 
     public void signFile() {
+
+        progressLabel.setText("Upload en cours");
         ESGIPocketProvider esgiPocketProvider = new ESGIPocketProvider(Authentification.getInstance().getToken());
         esgiPocketProvider.getSignedFile(Authentification.getInstance().getUser().getId() + "/" + fileName, "pdf", new ApiListener<SignedFile>() {
             @Override
@@ -127,7 +129,12 @@ public class CourseAddCell  {
 
             @Override
             public void onError(Throwable throwable) {
-                throwable.printStackTrace();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressLabel.setText("Erreur lors de l'upload du fichier");
+                    }
+                });
             }
         });
     }
@@ -143,8 +150,6 @@ public class CourseAddCell  {
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.EU_WEST_3).build();
             TransferManager xfer_mgr = TransferManagerBuilder.standard().withS3Client(s3Client).build();
 
-            progressLabel.setText("Upload en cours");
-
             try {
                 Upload xfer = xfer_mgr.upload(BUCKET_NAME,  Authentification.getInstance().getUser().getId() + "/" + fileName, f);
                 xfer.addProgressListener((ProgressListener) progressEvent -> {
@@ -157,8 +162,6 @@ public class CourseAddCell  {
                             @Override
                             public void run() {
                                 progressLabel.setText("Erreur lors de l'upload du fichier");
-                                System.out.println(xfer.getDescription());
-                                System.out.println(xfer.getState());
                             }
                         });
                     }
