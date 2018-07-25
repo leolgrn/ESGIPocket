@@ -382,4 +382,22 @@ public class ESGIPocketProvider {
             }
         });
     }
+
+    public void getSignedFile(String fileName, String fileType, final ApiListener<SignedFile> listener) {
+        esgiPocketService.getSignedFile(fileName, fileType).enqueue(new Callback<ESignedFile>() {
+            @Override
+            public void onResponse(Call<ESignedFile> call, Response<ESignedFile> response) {
+                if (listener != null) {
+                    SignedFileMapper signedFileMapper = new SignedFileMapper();
+                    SignedFile signedFile = signedFileMapper.map(response.body());
+                    listener.onSuccess(signedFile);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ESignedFile> call, Throwable throwable) {
+                if (listener != null) listener.onError(throwable);
+            }
+        });
+    }
 }
