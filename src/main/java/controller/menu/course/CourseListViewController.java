@@ -38,7 +38,7 @@ public class CourseListViewController extends ListViewController<Course> {
             @Override
             public void onSuccess(ArrayList<Course> response) {
                 courseArrayList = response;
-                setCourseListView(null);
+                setCourseListView(new VoteComparator());
             }
 
             @Override
@@ -67,6 +67,7 @@ public class CourseListViewController extends ListViewController<Course> {
     public void setTri(){
         TriTopBarController triTopBarController = new TriTopBarController();
         borderPane.setTop(triTopBarController.getAnchorPane());
+        triTopBarController.getChoiceBox().getSelectionModel().select(0);
         triTopBarController.getChoiceBox().setOnAction(event -> {
             reloadCourses(triTopBarController.getChoiceBox().getSelectionModel().getSelectedItem());
         });

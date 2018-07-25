@@ -80,6 +80,7 @@ public class Menu {
         borderPane.setBottom(null);
         insideBorderPane.setLeft(null);
         insideBorderPane.setBottom(null);
+        insideBorderPane.setTop(null);
     }
 
     public void onLessonsClick(MouseEvent mouseEvent) {
@@ -87,6 +88,7 @@ public class Menu {
         topicListViewController.setListView();
         borderPane.setBottom(null);
         insideBorderPane.setCenter(null);
+        insideBorderPane.setTop(null);
     }
 
     public void onQuizzesClick(MouseEvent mouseEvent) {
@@ -94,6 +96,7 @@ public class Menu {
         borderPane.setBottom(null);
         insideBorderPane.setLeft(null);
         insideBorderPane.setBottom(null);
+        insideBorderPane.setTop(null);
     }
 
     public void onAdminClick(MouseEvent mouseEvent) {
@@ -101,5 +104,6 @@ public class Menu {
         adminViewController.setListView();
         borderPane.setBottom(null);
         insideBorderPane.setCenter(null);
+        insideBorderPane.setTop(null);
     }
 }
