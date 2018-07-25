@@ -7,12 +7,15 @@ import com.amazonaws.event.ProgressListener;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import com.amazonaws.services.s3.transfer.Upload;
+import data.mainapi.ESGIPocketProvider;
 import data.mainapi.post.ESGIPocketProviderPost;
 import data.model.Authentification;
 import data.model.Course;
+import data.model.SignedFile;
 import data.model.User;
 import data.model.credentials.CourseCredentials;
 import interfaces.ApiListener;
@@ -108,12 +111,29 @@ public class CourseAddCell  {
             if (!fileFullName.contains(".")) {
                 fileFullName = fileFullName + fileToUpload.getName().substring(fileToUpload.getName().lastIndexOf("."), fileToUpload.getName().length());
             }
-            upload(fileFullName);
+            fileFullName = fileFullName.replaceAll("\\s+","_");
+            signFile(fileFullName);
+        });
+    }
+
+    public void signFile(String fileFullName) {
+        ESGIPocketProvider esgiPocketProvider = new ESGIPocketProvider(Authentification.getInstance().getToken());
+        esgiPocketProvider.getSignedFile(Authentification.getInstance().getUser().getId() + "/" + fileFullName, "pdf", new ApiListener<SignedFile>() {
+            @Override
+            public void onSuccess(SignedFile response) {
+                upload(response);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                throwable.printStackTrace();
+            }
         });
     }
 
 
-    public void upload(String fileFullName) {
+    public void upload(SignedFile signedFile) {
+
 
         String filePath = filePathTextField.getText();
         File f = new File(filePath);
@@ -125,16 +145,21 @@ public class CourseAddCell  {
             progressLabel.setText("Upload en cours");
 
             try {
-                Upload xfer = xfer_mgr.upload(BUCKET_NAME,  Authentification.getInstance().getUser().getId() + "/" + fileFullName, f);
-
+                Upload xfer = xfer_mgr.upload(BUCKET_NAME,  signedFile.getSignedRequest(), f);
                 xfer.addProgressListener((ProgressListener) progressEvent -> {
                     ProgressEventType progressEventType = progressEvent.getEventType();
                     if (progressEventType == ProgressEventType.TRANSFER_COMPLETED_EVENT) {
-                        addCourseToDatabase(fileFullName);
+                        addCourseToDatabase(signedFile.getUrl());
                     }
                     else if (progressEventType == ProgressEventType.TRANSFER_FAILED_EVENT || progressEventType == ProgressEventType.CLIENT_REQUEST_FAILED_EVENT) {
-                        progressLabel.setText("Erreur lors de l'upload du fichier");
-                        return;
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressLabel.setText("Erreur lors de l'upload du fichier");
+                                System.out.println(xfer.getDescription());
+                                System.out.println(xfer.getState());
+                            }
+                        });
                     }
                 });
             } catch (AmazonServiceException e) {

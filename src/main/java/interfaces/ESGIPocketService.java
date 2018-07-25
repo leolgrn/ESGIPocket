@@ -205,4 +205,6 @@ public interface ESGIPocketService {
     @DELETE("answers/{id}")
     Call<Void> deleteAnswer(@Path("id") String id);
 
+    @GET("courses/signFile/{fileName}/{fileType}")
+    Call<ESignedFile> getSignedFile(@Path("fileName") String fileName, @Path("fileType") String fileType);
 }
