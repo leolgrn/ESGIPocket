@@ -89,6 +89,7 @@ public class Menu {
         borderPane.setBottom(null);
         insideBorderPane.setCenter(null);
         insideBorderPane.setTop(null);
+        insideBorderPane.setBottom(null);
     }
 
     public void onQuizzesClick(MouseEvent mouseEvent) {
@@ -97,6 +98,7 @@ public class Menu {
         insideBorderPane.setLeft(null);
         insideBorderPane.setBottom(null);
         insideBorderPane.setTop(null);
+        insideBorderPane.setBottom(null);
     }
 
     public void onAdminClick(MouseEvent mouseEvent) {
@@ -105,5 +107,6 @@ public class Menu {
         borderPane.setBottom(null);
         insideBorderPane.setCenter(null);
         insideBorderPane.setTop(null);
+        insideBorderPane.setBottom(null);
     }
 }
